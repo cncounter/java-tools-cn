@@ -12,11 +12,12 @@ Java Platform, Standard Edition Tools Reference
 
 本翻译文档由CNCounter中文翻译组于2015年12月21日开始翻译，版权由原文版权所有者和翻译组共同所有。参与翻译请在wiki留言: [https://github.com/cncounter/java-tools-cn/wiki](https://github.com/cncounter/java-tools-cn/wiki)。
 
-翻译组成员列表如下：
+翻译组成员列表如下(排名不分先后)：
 
-* kimmking([http://blog.csdn.net/kimmking](http://blog.csdn.net/kimmking))
 * 铁锚([http://blog.csdn.net/renfufei](http://blog.csdn.net/renfufei))
 * jefferchang([https://github.com/jefferchang](https://github.com/jefferchang))
+* yuanmomo([https://github.com/yuanmomo](https://github.com/yuanmomo))
+* zhaiwei([https://github.com/zhaiweij](https://github.com/zhaiweij))
 
 完成百分比：0/17 ~ 0%
 
@@ -43,7 +44,7 @@ Java Platform, Standard Edition Tools Reference
 <td> - </td>
 <td> 铁锚 </td>
 <td> doing </td>
-<td> 2016-01-10 </td>
+<td> 2016-05-10 </td>
 </tr>
 
 <tr>
@@ -51,7 +52,7 @@ Java Platform, Standard Edition Tools Reference
 <td> - </td>
 <td> 成都-理工男 </td>
 <td> doing </td>
-<td> 2015-03-24 </td>
+<td> 2016-05-24 </td>
 </tr>
 
 <tr>
@@ -81,9 +82,9 @@ Java Platform, Standard Edition Tools Reference
 <tr>
 <td> 06 </td>
 <td> - </td>
-<td>  </td>
-<td>  </td>
-<td>  </td>
+<td> 翟伟 </td>
+<td> doing </td>
+<td> 2016-05-24 </td>
 </tr>
 
 <tr>
