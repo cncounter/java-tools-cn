@@ -28,9 +28,9 @@ Class Loading and Security Policies
 类加载和安全政策
 
 
-How the Java Runtime Finds Classes
+## How the Java Runtime Finds Classes
 
-Java运行时发现类如何
+## Java运行时发现类如何
 
 
 The JVM searches for and loads classes in this order:
@@ -38,19 +38,19 @@ The JVM searches for and loads classes in this order:
 JVM是如何搜索和加载类的顺序:
 
 
-Bootstrap classes, which are classes that comprise the Java platform, including the classes in rt.jar and several other important JAR files.
+1. Bootstrap classes, which are classes that comprise the Java platform, including the classes in rt.jar and several other important JAR files.
 
-引导类,类,包括Java平台,包括类rt.jar和其他几个重要的JAR文件。
-
-
-Extension classes, which use the Java Extension mechanism. These classes are bundled as JAR files and located in the extensions directory.
-
-扩展类,使用Java扩展机制。这些类是打包为JAR文件和位于扩展目录。
+1. 引导类,类,包括Java平台,包括类rt.jar和其他几个重要的JAR文件。
 
 
-User classes are classes that are defined by developers and third parties and that do not take advantage of the extension mechanism. You identify the location of these classes with the -classpath option on the command line (preferred) or with the CLASSPATH environment variable. See Setting the Class Path.
+2. Extension classes, which use the Java Extension mechanism. These classes are bundled as JAR files and located in the extensions directory.
 
-用户类的类是由开发人员和第三方,不利用扩展机制.你确定这些类与类路径的位置在命令行选项(优先)或CLASSPATH环境变量。看到设置类路径。
+2. 扩展类,使用Java扩展机制。这些类是打包为JAR文件和位于扩展目录。
+
+
+3. User classes are classes that are defined by developers and third parties and that do not take advantage of the extension mechanism. You identify the location of these classes with the -classpath option on the command line (preferred) or with the CLASSPATH environment variable. See [Setting the Class Path](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html#CBHHCGFB).
+
+3. 用户类的类是由开发人员和第三方,不利用扩展机制.你确定这些类与类路径的位置在命令行选项(优先)或CLASSPATH环境变量。看到设置类路径。
 
 
 In effect, the three search paths together form a simple class path. This is similar to the flat class path previously used, but the current model has the following improvements:
@@ -58,24 +58,24 @@ In effect, the three search paths together form a simple class path. This is sim
 实际上,这三个搜索路径组成一个简单的类路径。这类似于平坦的类路径之前使用,但目前的模型有以下改进:
 
 
-It is relatively difficult to accidentally hide or omit the bootstrap classes.
+* It is relatively difficult to accidentally hide or omit the bootstrap classes.
 
-相对很难不小心隐藏或省略了引导类。
-
-
-In general, you only have to specify the location of user classes. Bootstrap classes and extension classes are found automatically.
-
-在一般情况下,您只需要指定用户类的位置。引导类和扩展类自动发现。
+* 相对很难不小心隐藏或省略了引导类。
 
 
-The tools classes are now in a separate archive (tools.jar) and can only be used if included in the user class path described in How the Java Runtime Finds Bootstrap Classes.
+* In general, you only have to specify the location of user classes. Bootstrap classes and extension classes are found automatically.
 
-工具类现在在一个单独的档案(tools.jar),仅能用于如果包含在用户类路径中描述Java运行时发现如何引导类。
+* 在一般情况下,您只需要指定用户类的位置。引导类和扩展类自动发现。
 
 
-How the Java Runtime Finds Bootstrap Classes
+* The tools classes are now in a separate archive (tools.jar) and can only be used if included in the user class path described in How the Java Runtime Finds Bootstrap Classes.
 
-Java运行时发现引导类如何
+* 工具类现在在一个单独的档案(tools.jar),仅能用于如果包含在用户类路径中描述Java运行时发现如何引导类。
+
+
+## How the Java Runtime Finds Bootstrap Classes
+
+## Java运行时发现引导类如何
 
 
 Bootstrap classes are the classes that implement Java SE. Bootstrap classes are in the rt.jar file and several other JAR files in the jre/lib directory. These archives are specified by the value of the bootstrap class path that is stored in the sun.boot.class.path system property. This system property is for reference only and should not be directly modified.It is unlikely that you will need to redefine the bootstrap class path. The nonstandard option, -Xbootclasspath, allows you to do so in those rare circumstances in which it is necessary to use a different set of core classes.
@@ -88,9 +88,9 @@ Note that the classes that implement the JDK tools are in a separate archive fro
 注意,在一个单独的类,实现JDK工具从引导类档案。档案是JDK /lib/tools.的工具jar文件.开发工具将这个档案添加到用户类路径调用发射器。然而,这种增强用户类路径是仅用于执行工具.过程的工具源代码,javac命令,和javadoc命令,使用原始的类路径,而不是增强版本.有关更多信息,请参见如何javac和javadoc命令找到类。
 
 
-How the Java Runtime Finds Extension Classes
+## How the Java Runtime Finds Extension Classes
 
-Java运行时发现扩展类如何
+## Java运行时发现扩展类如何
 
 
 Extension classes are classes that extend the Java platform. Every .jar file in the extension directory, jre/lib/ext, is assumed to be an extension and is loaded with the Java Extension Framework. Loose class files in the extension directory are not found. They must be contained in a JAR file or Zip file. There is no option provided for changing the location of the extension directory.
@@ -103,19 +103,14 @@ If the jre/lib/ext directory contains multiple JAR files, and those files contai
 如果jre / lib / ext目录下包含多个JAR文件,这些文件包含具有相同名称的类,如在下面的例子中,实际加载的类定义。
 
 
-smart-extension1_0.jar contains class smart.extension.Smart
-
-smart-extension1_0。jar包含类smart.extension.Smart
-
-
-smart-extension1_1.jar contains class smart.extension.Smart
-
-smart-extension1_1。jar包含类smart.extension.Smart
+> smart-extension1_0.jar contains class smart.extension.Smart
+>
+>smart-extension1_1.jar contains class smart.extension.Smart
 
 
-How the Java Runtime Finds User Classes
+## How the Java Runtime Finds User Classes
 
-Java运行时发现用户类如何
+## Java运行时发现用户类如何
 
 
 To find user classes, the launcher refers to the user class path, which is a list of directories, JAR files, and Zip files that contain class files.
@@ -138,29 +133,22 @@ The user class path is specified as a string, with a colon (:) to separate the c
 用户类路径指定为一个字符串,用冒号(:)在Oracle Solaris,单独的类路径条目和分号(;)来分离在Windows系统上的条目.Java启动程序将java.class用户类路径字符串。道路系统属性。这个值的可能的来源有:
 
 
-The default value, *.*, which means that user class files are all the class files in or under the current directory.
+* The default value, *.*, which means that user class files are all the class files in or under the current directory.
 
-The default value, *. *, which means that The user class files are all The class files in or under The current directory.
-
-
-The value of the CLASSPATH environment variable that overrides the default value.
-
-CLASSPATH环境变量的值,覆盖默认值。
+* The value of the CLASSPATH environment variable that overrides the default value.
 
 
-The value of the -cp or -classpath command-line option that overrides both the default value and the CLASSPATH value.
+* The value of the -cp or -classpath command-line option that overrides both the default value and the CLASSPATH value.
 
-- cp或类路径命令行选项的值覆盖默认值和类路径值。
-
-
-The JAR archive specified by the -jar option overrides all other values if it contains a Class-Path entry in its manifest. If this option is used, all user classes must come from the specified archive.
-
-指定的JAR归档JAR选项覆盖所有其他值如果它包含一个类路径条目清单.如果使用这个选项,所有用户类必须来自指定的档案。
+* The JAR archive specified by the -jar option overrides all other values if it contains a Class-Path entry in its manifest. If this option is used, all user classes must come from the specified archive.
 
 
-How the Java Runtime Finds JAR-class-path Classes
+* 指定的JAR归档JAR选项覆盖所有其他值如果它包含一个类路径条目清单.如果使用这个选项,所有用户类必须来自指定的档案。
 
-Java运行时发现JAR-class-path类如何
+
+## How the Java Runtime Finds JAR-class-path Classes
+
+## Java运行时发现JAR-class-path类如何
 
 
 A JAR file usually contains a manifest, which is a file that lists the contents of the JAR file. The manifest can define a JAR class path, which further extends the class path, but only while loading classes from that JAR file. Classes accessed by a JAR class path are found in the following order:
@@ -168,36 +156,36 @@ A JAR file usually contains a manifest, which is a file that lists the contents 
 一个JAR文件通常包含一个清单,这是一个文件,列出了JAR文件的内容.可以定义为JAR manifest The class路径,从而进一步extends The class路径,但这仅而classes loading JAR file,从.类访问一罐类路径中发现以下订单:
 
 
-In general, classes referenced by a JAR class path entry are found as though they are part of the JAR file. The JAR files that appear in the JAR-class-path are searched after any earlier class path entries and before any entries that appear later in the class path.
+1. In general, classes referenced by a JAR class path entry are found as though they are part of the JAR file. The JAR files that appear in the JAR-class-path are searched after any earlier class path entries and before any entries that appear later in the class path.
 
-一般来说,类JAR引用的类路径条目发现像JAR文件的一部分.JAR文件后,出现在搜索JAR-class-path任何类路径条目,条目之前早些时候出现在类路径中。
-
-
-If the JAR class path points to a JAR file that was already searched, for example, an extension or a JAR file that was listed earlier in the class path, then that JAR file is not searched again. This optimization improves efficiency and prevents circular searches. This type of JAR file is searched at the point that it appears, which is earlier in the class path.
-
-如果JAR的类路径点已经搜查了一个JAR文件,例如,一个扩展或JAR文件前面列出的类路径中,然后再次JAR文件不是搜索.这种优化提高效率和防止循环搜索。这种类型的JAR文件搜索的时候,似乎,这是早些时候在类路径中。
+1. 一般来说,类JAR引用的类路径条目发现像JAR文件的一部分.JAR文件后,出现在搜索JAR-class-path任何类路径条目,条目之前早些时候出现在类路径中。
 
 
-If a JAR file is installed as an extension, then any JAR class path it defines is ignored. All of the classes required by an extension are presumed to be part of the JDK or to have been installed as extension.
+2. If the JAR class path points to a JAR file that was already searched, for example, an extension or a JAR file that was listed earlier in the class path, then that JAR file is not searched again. This optimization improves efficiency and prevents circular searches. This type of JAR file is searched at the point that it appears, which is earlier in the class path.
 
-如果一个JAR文件安装为一个扩展,然后定义忽略任何JAR的类路径.所需的所有类的扩展被假定是JDK的一部分或者是安装扩展。
+2. 如果JAR的类路径点已经搜查了一个JAR文件,例如,一个扩展或JAR文件前面列出的类路径中,然后再次JAR文件不是搜索.这种优化提高效率和防止循环搜索。这种类型的JAR文件搜索的时候,似乎,这是早些时候在类路径中。
 
 
-How the javac and javadoc Commands Find Classes
+3. If a JAR file is installed as an extension, then any JAR class path it defines is ignored. All of the classes required by an extension are presumed to be part of the JDK or to have been installed as extension.
+
+3. 如果一个JAR文件安装为一个扩展,然后定义忽略任何JAR的类路径.所需的所有类的扩展被假定是JDK的一部分或者是安装扩展。
+
+
+## How the javac and javadoc Commands Find Classes
 The javac and javadoc commands use class files in the following two ways:
 
-javac和javadoc命令如何找到类
+## javac和javadoc命令如何找到类
 使用javac和javadoc命令类文件在以下两个方面:
 
 
-To run, the javac and javadoc commands must load various class files.
+* To run, the javac and javadoc commands must load various class files.
 
-运行,javac和javadoc命令必须加载不同的类文件。
+* 运行,javac和javadoc命令必须加载不同的类文件。
 
 
-To process the source code they operate on, the javac and javadoc commands must obtain information on object types used in the source code.
+* To process the source code they operate on, the javac and javadoc commands must obtain information on object types used in the source code.
 
-处理他们操作的源代码,javac和javadoc命令必须获得信息对象类型中使用源代码。
+* 处理他们操作的源代码,javac和javadoc命令必须获得信息对象类型中使用源代码。
 
 
 The class files used to resolve source code references are mostly the same class files used to run the javac and javadoc commands. But there are some important exceptions, as follows:
@@ -205,19 +193,19 @@ The class files used to resolve source code references are mostly the same class
 用于解决源代码引用的类文件大多是同一类文件用于运行javac和javadoc命令。但也有一些重要的例外,如下:
 
 
-Both the javac and javadoc commands often resolve references to classes and interfaces that have nothing to do with the implementation of the javac or javadoc commands. Information on referenced user classes and interfaces might be present in the form of class files, source code files, or both.
+* Both the javac and javadoc commands often resolve references to classes and interfaces that have nothing to do with the implementation of the javac or javadoc commands. Information on referenced user classes and interfaces might be present in the form of class files, source code files, or both.
 
-javac和javadoc命令通常解决引用类和接口无关的javac或javadoc命令的实现.信息可能存在引用用户类和接口的类文件,源代码文件,或两者兼而有之。
-
-
-The tools classes in the tools.jar file are only used to run the javac and javadoc commands. The tools classes are not used to resolve source code references unless the tools.jar file is in the user class path.
-
-工具类的工具。jar文件仅用于运行javac和javadoc命令。工具类不习惯解决源代码引用,除非工具.jar文件在用户类路径。
+* javac和javadoc命令通常解决引用类和接口无关的javac或javadoc命令的实现.信息可能存在引用用户类和接口的类文件,源代码文件,或两者兼而有之。
 
 
-A programmer might want to resolve boot class or extension class references with an alternative Java platform implementation. Both the javac and javadoc commands support this with their -bootclasspath and -extdirs options. Use of these options does not modify the set of class files used to run the javac or javadoc commands themselves.
+* The tools classes in the tools.jar file are only used to run the javac and javadoc commands. The tools classes are not used to resolve source code references unless the tools.jar file is in the user class path.
 
-程序员可能想解决引导类或扩展类引用另一个Java平台实现.javac和javadoc命令支持这个bootclasspath和-extdirs选项.使用这些选项不修改类文件的设置用于运行javac或javadoc命令自己。
+* 工具类的工具。jar文件仅用于运行javac和javadoc命令。工具类不习惯解决源代码引用,除非工具.jar文件在用户类路径。
+
+
+* A programmer might want to resolve boot class or extension class references with an alternative Java platform implementation. Both the javac and javadoc commands support this with their -bootclasspath and -extdirs options. Use of these options does not modify the set of class files used to run the javac or javadoc commands themselves.
+
+* 程序员可能想解决引导类或扩展类引用另一个Java平台实现.javac和javadoc命令支持这个bootclasspath和-extdirs选项.使用这些选项不修改类文件的设置用于运行javac或javadoc命令自己。
 
 
 If a referenced class is defined in both a class file and a source file, the javadoc command always uses the source file. The javadoc command never compiles source files. In the same situation the javac command uses class files, but automatically recompiles any class files it determines to be out of date. The rules for automatic recompilation are documented in javac.
@@ -230,10 +218,12 @@ By default, the javac and javadoc commands search the user class path for both c
 默认情况下,javac和javadoc命令搜索的用户类路径类文件和源代码文件.如果指定的路径中选择,javac和javadoc命令搜索源文件只在指定的源文件路径,同时搜索的用户类路径类文件。
 
 
-Class Loading and Security Policies
+## Class Loading and Security Policies
+
 To be used, a class or interface must be loaded by a class loader. Use of a particular class loader determines a security policy associated with the class loader.
 
-类加载和安全政策
+## 类加载和安全政策
+
 要使用,必须加载一个类或接口的类装入器。使用一个特定的类装入器确定一个安全策略相关联的类装入器。
 
 
