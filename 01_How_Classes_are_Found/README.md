@@ -1,11 +1,9 @@
-# 1 How Classes are Found
-
-# 1类是如何发现的
+# 1. Java如何找到Class
 
 
 The java command is called the Java launcher because it launches Java applications. When the Java launcher is called, it gathers input from the user and the user's environment (such as the class path and the boot class path), interfaces with the Virtual Machine (VM), and gets it started via some bootstrapping. The Java Virtual Machine (JVM) does the rest of the work.
 
-java命令调用java启动程序,因为它启动java应用程序.当Java启动程序被调用时,它收集来自用户的输入和用户的环境(如类路径和引导类路径),接口的虚拟机(VM),,它开始通过一些引导。Java虚拟机(JVM)的其他工作。
+`java` 命令被称为 Java launcher, 因为它启动java应用. 当调用 Java launcher 启动程序时, 它收集用户输入以及用户环境(如类路径(class path)和引导类路径(boot class path) ), 虚拟机(VM)接口, 并通过一些引导来开始。剩下的工作由Java虚拟机(JVM)负责。
 
 
 This chapter covers the following topics:
@@ -15,67 +13,68 @@ This chapter covers the following topics:
 
 How the Java Runtime Finds Classes
 
-Java运行时发现类如何
+Java运行时如何发现类
 
 
 How the javac and javadoc Commands Find Classes
 
-javac如何Commands javadoc和非自愿失踪受害者家属协会职等
+javac 和 javadoc 命令如何发现类
 
 
 Class Loading and Security Policies
 
-类加载和安全政策
+类加载和安全策略
 
 
 ## How the Java Runtime Finds Classes
 
-## Java运行时发现类如何
+## Java运行时如何发现类
 
 
 The JVM searches for and loads classes in this order:
 
-JVM是如何搜索和加载类的顺序:
+JVM以下面的顺序来查找和加载类:
 
 
 1. Bootstrap classes, which are classes that comprise the Java platform, including the classes in rt.jar and several other important JAR files.
 
-1. 引导类,类,包括Java平台,包括类rt.jar和其他几个重要的JAR文件。
+1. 引导类(Bootstrap classes), 由Java平台组成, 包括 `rt.jar` 和其他几个重要的JAR文件中的类。
 
 
 2. Extension classes, which use the Java Extension mechanism. These classes are bundled as JAR files and located in the extensions directory.
 
-2. 扩展类,使用Java扩展机制。这些类是打包为JAR文件和位于扩展目录。
+2. 扩展类(Extension classes), 使用Java扩展机制(Extension mechanism)。这些类被打包为JAR文件, 放在扩展目录中。
 
 
 3. User classes are classes that are defined by developers and third parties and that do not take advantage of the extension mechanism. You identify the location of these classes with the -classpath option on the command line (preferred) or with the CLASSPATH environment variable. See [Setting the Class Path](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html#CBHHCGFB).
 
-3. 用户类的类是由开发人员和第三方,不利用扩展机制.你确定这些类与类路径的位置在命令行选项(优先)或CLASSPATH环境变量。看到设置类路径。
+3. 用户类(User classes), 是由开发人员和第三方定义的类, 不利用扩展机制. 你可以通过命令行设置 `-classpath` 选项来确定这些类的位置(优先). 还可以设置 **CLASSPATH** 环境变量。可以参考 [Setting the Class Path](../02_Setting_the_Class_Path/)。
 
 
 In effect, the three search paths together form a simple class path. This is similar to the flat class path previously used, but the current model has the following improvements:
 
-实际上,这三个搜索路径组成一个简单的类路径。这类似于平坦的类路径之前使用,但目前的模型有以下改进:
+实际上,这三个搜索路径组成一个简单的类路径。这类似于之前使用的平坦类路径,但目前的模型有以下改进:
 
 
 * It is relatively difficult to accidentally hide or omit the bootstrap classes.
 
-* 相对很难不小心隐藏或省略了引导类。
+* 相对很难隐藏或省略引导类。
 
 
 * In general, you only have to specify the location of user classes. Bootstrap classes and extension classes are found automatically.
 
-* 在一般情况下,您只需要指定用户类的位置。引导类和扩展类自动发现。
+* 在一般情况下,您只需要指定用户类的位置。引导类和扩展类会自动发现。
 
 
 * The tools classes are now in a separate archive (tools.jar) and can only be used if included in the user class path described in How the Java Runtime Finds Bootstrap Classes.
 
-* 工具类现在在一个单独的档案(tools.jar),仅能用于如果包含在用户类路径中描述Java运行时发现如何引导类。
+* 工具类现在在一个单独的包中(`tools.jar`), 只有包含在用户类路径中才能使用, 参考下面的 **Java运行时如何发现引导类**。
 
 
 ## How the Java Runtime Finds Bootstrap Classes
 
-## Java运行时发现引导类如何
+
+## Java运行时如何发现引导类
 
 
 Bootstrap classes are the classes that implement Java SE. Bootstrap classes are in the rt.jar file and several other JAR files in the jre/lib directory. These archives are specified by the value of the bootstrap class path that is stored in the sun.boot.class.path system property. This system property is for reference only and should not be directly modified.It is unlikely that you will need to redefine the bootstrap class path. The nonstandard option, -Xbootclasspath, allows you to do so in those rare circumstances in which it is necessary to use a different set of core classes.
@@ -220,31 +219,32 @@ By default, the javac and javadoc commands search the user class path for both c
 
 ## Class Loading and Security Policies
 
+## 类加载和安全策略
+
 To be used, a class or interface must be loaded by a class loader. Use of a particular class loader determines a security policy associated with the class loader.
 
-## 类加载和安全政策
 
-要使用,必须加载一个类或接口的类装入器。使用一个特定的类装入器确定一个安全策略相关联的类装入器。
+要使用类加载和安全策略, 必须通过 class loader 来加载一个类或接口。使用一个特定的类加载器就确定了与类加载器相关联的一个安全策略。
 
 
 A program can load a class or interface by calling the loadClass method of a class loader object. But usually a program loads a class or interface by referring to it. This invokes an internal class loader, which can apply a security policy to extension and user classes. If the security policy has not been enabled, all classes are trusted. Even if the security policy is enabled, it does not apply to bootstrap classes, which are always trusted.
 
-程序可以加载一个类或接口的loadClass方法通过调用一个类装入器对象。但通常指加载一个类或接口的一个程序.这个调用内部类装入器,可以将一个安全策略应用于扩展和用户类。如果安全策略尚未启用,所有类都是可信的.即使启用了安全策略,它不适用于引导类,总是信任。
+程序可以通过类加载器对象的 `loadClass` 方法来加载一个类或接口。但通常通过指向一个类来加载一个类或接口. 这会调用内部的类加载器, 其可以将安全策略应用于扩展类和用户类。如果安全策略尚未启用, 所有类都是可信的. 即使启用了安全策略,它也不适用于引导类,因为总是信任 bootstrap classes。
 
 
 When enabled, security policy is configured by system and user policy files. The Java platform SDK includes a system policy file that grants trusted status to extension classes and places basic restrictions on user classes.
 
-启用时,安全策略配置系统和用户策略文件.Java平台的SDK包含一个系统政策文件,授予信任状态扩展类和地方基本限制用户类。
+启用时,安全策略通过系统和用户策略文件配置. Java平台的SDK包含一个系统策略文件, 授予对扩展类的信任状态，以及对用户类给予基本限制。
 
 
 To enable or configure the security policy, refer to Security Features.
 
-启用或配置安全策略,请参阅安全特性。
+启用或配置安全策略, 请参阅 [安全特性]()。
 
 
 Note: Some security programming techniques that worked with earlier releases of Java SE are incompatible with the class loading model of the current release.
 
-注意:一些安全编程技术工作与以前的Java SE版本是不兼容的类加载模型的当前版本。
+> **注意**: 早期Java SE版本的一些安全编程技术和当前版本的类加载模型是不兼容的。
 
 
 原文链接: [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/findingclasses.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/findingclasses.html)
