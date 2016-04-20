@@ -104,7 +104,7 @@ If the jre/lib/ext directory contains multiple JAR files, and those files contai
 
 > smart-extension1_0.jar contains class smart.extension.Smart
 >
->smart-extension1_1.jar contains class smart.extension.Smart
+> smart-extension1_1.jar contains class smart.extension.Smart
 
 
 ## How the Java Runtime Finds User Classes
@@ -157,26 +157,24 @@ The user class path is specified as a string, with a colon (:) to separate the c
 ## Java运行时如何发现 JAR-class-path 的类
 
 
-## TODO
-
 A JAR file usually contains a manifest, which is a file that lists the contents of the JAR file. The manifest can define a JAR class path, which further extends the class path, but only while loading classes from that JAR file. Classes accessed by a JAR class path are found in the following order:
 
-一个JAR文件通常包含一个清单,这是一个文件,列出了JAR文件的内容.可以定义为JAR manifest The class路径,从而进一步extends The class路径,但这仅而classes loading JAR file,从.类访问一罐类路径中发现以下订单:
+通常每个JAR文件包含一个 manifest 清单, 清单文件中列出了JAR文件的内容.  manifest 可以定义JAR  class path, 从而进一步扩展 class path, 但这只适用于从该 JAR 包加载类的时候, 由JAR class path 引用的类通过以下顺序进行查找:
 
 
 1. In general, classes referenced by a JAR class path entry are found as though they are part of the JAR file. The JAR files that appear in the JAR-class-path are searched after any earlier class path entries and before any entries that appear later in the class path.
 
-1. 一般来说,类JAR引用的类路径条目发现像JAR文件的一部分.JAR文件后,出现在搜索JAR-class-path任何类路径条目,条目之前早些时候出现在类路径中。
+1. 一般来说,JAR class path 条目引用的类路径都是JAR文件中的一部分.出现在 JAR-class-path 中的JAR文件,搜索顺序也是由其出现的顺序决定。
 
 
 2. If the JAR class path points to a JAR file that was already searched, for example, an extension or a JAR file that was listed earlier in the class path, then that JAR file is not searched again. This optimization improves efficiency and prevents circular searches. This type of JAR file is searched at the point that it appears, which is earlier in the class path.
 
-2. 如果JAR的类路径点已经搜查了一个JAR文件,例如,一个扩展或JAR文件前面列出的类路径中,然后再次JAR文件不是搜索.这种优化提高效率和防止循环搜索。这种类型的JAR文件搜索的时候,似乎,这是早些时候在类路径中。
+2. 如果 JAR class path 指向一个已经查找过的JAR文件,例如,扩展类或者前面的 class path 中列出的类路径, 则 JAR 文件不会被再次搜索. 这种优化提高了效率,并且阻止了循环搜索。这种类型的JAR文件在出现时进行搜索, 早于 class path。
 
 
 3. If a JAR file is installed as an extension, then any JAR class path it defines is ignored. All of the classes required by an extension are presumed to be part of the JDK or to have been installed as extension.
 
-3. 如果一个JAR文件安装为一个扩展,然后定义忽略任何JAR的类路径.所需的所有类的扩展被假定是JDK的一部分或者是安装扩展。
+3. 如果JAR文件被安装为扩展, 那么指定的所有JAR文件都会被忽略. 扩展类所需的任何类, 都被假定为是JDK的一部分,或者是已经安装为一个扩展。
 
 
 ## How the javac and javadoc Commands Find Classes
@@ -185,47 +183,46 @@ A JAR file usually contains a manifest, which is a file that lists the contents 
 
 The javac and javadoc commands use class files in the following two ways:
 
-使用javac和javadoc命令类文件在以下两个方面:
-
+javac和javadoc命令通过以下两种方式使用类文件:
 
 * To run, the javac and javadoc commands must load various class files.
 
-* 运行,javac和javadoc命令必须加载不同的类文件。
+* 用来运行,javac和javadoc命令必须加载各种不同的类文件。
 
 
 * To process the source code they operate on, the javac and javadoc commands must obtain information on object types used in the source code.
 
-* 处理他们操作的源代码,javac和javadoc命令必须获得信息对象类型中使用源代码。
+* 要处理源代码, javac和javadoc命令必须获得源代码中使用的对象的类型信息。
 
 
 The class files used to resolve source code references are mostly the same class files used to run the javac and javadoc commands. But there are some important exceptions, as follows:
 
-用于解决源代码引用的类文件大多是同一类文件用于运行javac和javadoc命令。但也有一些重要的例外,如下:
+用于解决源代码引用的类文件大多和用于运行javac和javadoc命令的是同样的 class 文件。但也有一些重要的例外:
 
 
 * Both the javac and javadoc commands often resolve references to classes and interfaces that have nothing to do with the implementation of the javac or javadoc commands. Information on referenced user classes and interfaces might be present in the form of class files, source code files, or both.
 
-* javac和javadoc命令通常解决引用类和接口无关的javac或javadoc命令的实现.信息可能存在引用用户类和接口的类文件,源代码文件,或两者兼而有之。
+* javac和javadoc命令通常引用的类和接口都是和 javac或javadoc命令的实现无关的类. 信息通常存在于引用的用户类/接口的 class 文件, 源代码文件,或两者兼而有之。
 
 
 * The tools classes in the tools.jar file are only used to run the javac and javadoc commands. The tools classes are not used to resolve source code references unless the tools.jar file is in the user class path.
 
-* 工具类的工具。jar文件仅用于运行javac和javadoc命令。工具类不习惯解决源代码引用,除非工具.jar文件在用户类路径。
+* tools.jar 中的工具类只用于运行javac和javadoc命令。tools classes 一般不用于解决源码中的引用, 除非 tools.jar 文件出现在用户类路径之。
 
 
 * A programmer might want to resolve boot class or extension class references with an alternative Java platform implementation. Both the javac and javadoc commands support this with their -bootclasspath and -extdirs options. Use of these options does not modify the set of class files used to run the javac or javadoc commands themselves.
 
-* 程序员可能想解决引导类或扩展类引用另一个Java平台实现.javac和javadoc命令支持这个bootclasspath和-extdirs选项.使用这些选项不修改类文件的设置用于运行javac或javadoc命令自己。
+* 程序员可能会使用另一种Java平台实现来解决引导类或扩展类引用. javac 和 javadoc命令支持 `-bootclasspath` 和 `-extdirs` 选项. 使用这些选项不会修改运行 javac或javadoc命令自身的 class 文件集合。
 
 
 If a referenced class is defined in both a class file and a source file, the javadoc command always uses the source file. The javadoc command never compiles source files. In the same situation the javac command uses class files, but automatically recompiles any class files it determines to be out of date. The rules for automatic recompilation are documented in javac.
 
-如果一个引用类中定义一个类文件和源文件,javadoc命令总是使用源文件。javadoc命令编译源文件.在相同的情况下,javac命令使用类文件,但自动重新编译类文件它决定要过时了。的规则自动重新编译在javac记录。
+如果某个被引用的类中出现在 class 文件之中, 也出现在源文件之中, 则 javadoc 命令总是使用源文件。而 javadoc命令绝不编译源文件(因为他只是一个文档工具而已). 同样的情况下, javac命令使用 class 文件, 但自动重新编译那些他认为陈旧的 class 文件。自动重新编译的规则请参考 [javac 文档](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/javac.html)。
 
 
 By default, the javac and javadoc commands search the user class path for both class files and source code files. If the -sourcepath option is specified, the javac and javadoc commands search for source files only on the specified source file path, while still searching the user class path for class files.
 
-默认情况下,javac和javadoc命令搜索的用户类路径类文件和源代码文件.如果指定的路径中选择,javac和javadoc命令搜索源文件只在指定的源文件路径,同时搜索的用户类路径类文件。
+默认情况下, javac和javadoc命令查找用户类路径下的 class 文件和源代码文件. 如果指定了 `-sourcepath` 选项, javac和javadoc命令只在指定的源文件路径下搜索源文件, 同时搜索的用户类路径下的 class 文件。
 
 
 ## Class Loading and Security Policies
