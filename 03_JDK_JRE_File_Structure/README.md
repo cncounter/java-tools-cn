@@ -1,11 +1,11 @@
 # 3. JDK and JRE File Structure
 
-# 3. JDK 和 JRE 目录结构
+# 3. JDK 和 JRE 的目录结构
 
 
 This chapter introduces the JDK directories and the files they contain. The file structure of the JRE is identical to the structure of the jre directory in the JDK.
 
-本章介绍了JDK目录和其中包含的文件。JRE的文件结构是相同的结构在JDK JRE目录。
+本章介绍JDK目录和其中包含的文件。JRE的文件结构与JDK 内部的 jre 目录结构是一致的。
 
 
 This chapter covers the following topics:
@@ -15,25 +15,25 @@ This chapter covers the following topics:
 
 - Demos and Samples
 
-- 演示和样品
+- 演示和示例
 
 
 
 - Development Files and Directories
 
-- 开发文件和目录
+- 开发包的文件和目录
 
 
 
 - Additional Files and Directories
 
-- Directories详尽和补充
+- 附加文件和目录
 
 
 
 ## Demos and Samples
 
-## 演示和精彩
+## 演示和示例
 
 
 Demos and samples that show you how to program for the Java platform are available as a separate download at the Java SE Downloads page at
@@ -50,7 +50,7 @@ These are available as separate .tar.z compressed packages and .tar.gz compresse
 
 ## Development Files and Directories
 
-## 开发文件和目录
+## 开发包的文件和目录
 
 
 This section describes the most important files and directories required to develop applications for the Java platform. Some of the directories that are not required include Java source code and C header files. See Additional Files and Directories.
@@ -92,7 +92,7 @@ Assuming the JDK software is installed at /jdk1.8.0, here are some of the most i
 假设软件是安装在/ jdk1.8.0 JDK,下面是一些最重要的目录:
 
 
-### /jdk1.8.0
+> /jdk1.8.0
 
 
 
@@ -102,7 +102,7 @@ Root directory of the JDK software installation. Contains copyright, license, an
 The Root directory of the JDK software installation. The Contains copyright and license, and the README files. Also Contains the SRC. Zip, the archive of the source code for the Java platform.
 
 
-### /jdk1.8.0/bin
+> /jdk1.8.0/bin
 
 
 
@@ -112,9 +112,8 @@ Executables for all the development tools contained in the JDK. The PATH environ
 JDK中包含可执行程序的开发工具。PATH环境变量应该包含这个目录的条目。
 
 
-### /jdk1.8.0/lib
+> /jdk1.8.0/lib
 
-### jdk1.8.0 / lib /
 
 
 Files used by the development tools. Includes tools.jar, which contains non-core classes for support of the tools and utilities in the JDK. Also includes dt.jar, the DesignTime archive of BeanInfo files that tell interactive development environments (IDEs) how to display the Java components and how to let the developer customize them for an application.
@@ -122,7 +121,7 @@ Files used by the development tools. Includes tools.jar, which contains non-core
 文件所使用的开发工具。包括工具。jar,它包含非核心类支持JDK工具和实用程序。还包括dt.jar DesignTime BeanInfo文件的存档,告诉交互式开发环境(ide)如何显示Java组件,以及如何让开发人员自定义应用程序。
 
 
-### /jdk1.8.0/jre
+> /jdk1.8.0/jre
 
 
 
@@ -132,7 +131,7 @@ Root directory of the Java Runtime Environment (JRE) used by the JDK development
 根目录的Java运行时环境(JRE)JDK所使用的开发工具。运行时环境是Java平台的一个实现.这是指由java的目录。系统属性。
 
 
-### /jdk1.8.0/jre/bin
+> /jdk1.8.0/jre/bin
 
 
 
@@ -142,7 +141,7 @@ Executable files for tools and libraries used by the Java platform. The executab
 可执行文件的Java平台所使用的工具和库。可执行文件是相同的文件/ jdk1.8.0 / bin.java启动程序工具作为一个应用程序启动器(取代了早期jre 1.1版本的JDK附带的命令).这个目录不需要在PATH环境变量中。
 
 
-### /jdk1.8.0/jre/lib
+> /jdk1.8.0/jre/lib
 
 
 
@@ -152,7 +151,7 @@ Code libraries, property settings, and resource files used by the JRE. For examp
 代码库、属性设置和资源文件使用的JRE。例如rt.jar包含引导类,包括Java平台的运行时类核心API,和数据集。jar包含字符转换类.除了ext目录,有几个额外的资源目录不是这里描述。
 
 
-### /jdk1.8.0/jre/lib/ext
+> /jdk1.8.0/jre/lib/ext
 
 
 
@@ -164,7 +163,7 @@ http://docs.oracle.com/javase/8/docs/technotes/guides/extensions/index.html
 http://docs.oracle.com/javase/8/docs/technotes/guides/extensions/index.html
 
 
-### /jdk1.8.0/jre/lib/security
+> /jdk1.8.0/jre/lib/security
 
 
 
@@ -174,7 +173,7 @@ Contains files used for security management. These include the security policy j
 
 
 
-### /jdk1.8.0/jre/lib/sparc
+> /jdk1.8.0/jre/lib/sparc
 
 
 
@@ -184,7 +183,7 @@ Contains the .so (shared object) files used by the Oracle Solaris release of the
 包含了。所以(共享对象)文件使用的Oracle Solaris版本的Java平台。
 
 
-### /jdk1.8.0/jre/lib/sparc/client
+> /jdk1.8.0/jre/lib/sparc/client
 
 
 
@@ -194,7 +193,7 @@ Contains the .so file used by the Java HotSpot VM client, which is implemented w
 包含了。所以Java HotSpot虚拟机客户端所使用的文件,这是与Java HotSpot VM技术的实现。这是默认的Java虚拟机(JVM)。
 
 
-### /jdk1.8.0/jre/lib/sparc/server
+> /jdk1.8.0/jre/lib/sparc/server
 
 
 
@@ -204,7 +203,7 @@ Contains the .so file used by the Java HotSpot VM server.
 包含了。所以Java HotSpot VM服务器所使用的文件。
 
 
-### /jdk1.8.0/jre/lib/applet
+> /jdk1.8.0/jre/lib/applet
 
 
 
@@ -214,7 +213,7 @@ JAR files that contain support classes for applets can be placed in the lib/appl
 为applet JAR文件包含支持类可以放在lib / applet /目录中.这降低了大型applet启动时间允许applet类加载applet从本地文件系统的类装入器,好像他们已经提供了相同的保护 互联网downloaded寺院。
 
 
-### /jdk1.8.0/jre/lib/fonts
+> /jdk1.8.0/jre/lib/fonts
 
 
 
@@ -226,7 +225,7 @@ Font files used by the platform.
 
 ## Additional Files and Directories
 
-## 额外的文件和目录
+## 附加文件和目录
 
 
 This section describes the directory structure for Java source code, C header files, and other additional directories and files.
@@ -243,7 +242,7 @@ This section describes the directory structure for Java source code, C header fi
 
 
 
-### /jdk1.8.0/src.zip
+> /jdk1.8.0/src.zip
 
 
 
@@ -253,7 +252,7 @@ Archive that contains the source code for the Java platform.
 的档案文件,包含Java平台的源代码。
 
 
-### /jdk1.8.0/db
+> /jdk1.8.0/db
 
 
 
@@ -265,33 +264,31 @@ http://docs.oracle.com/javadb/
 http://docs.oracle.com/javadb/
 
 
-### /jdk1.8.0/include
-
-
+> /jdk1.8.0/include
 
 
 C-language header files that support native-code programming with the Java Native Interface and the Java Virtual Machine (JVM) Debugger Interface. See Java Native Interface at
 http://docs.oracle.com/javase/8/docs/technotes/guides/jni/index.html
 
-c语言支持本机代码编程的头文件与Java本地接口和Java虚拟机(JVM)调试器接口。看到Java Native Interface
-http://docs.oracle.com/javase/8/docs/technotes/guides/jni/index.html
+C语言的头文件, 用于支持JNI(Java Native Interface)编程与Java虚拟机(JVM)调试器接口编程。请参考 Java Native Interface 文档:  
+[http://docs.oracle.com/javase/8/docs/technotes/guides/jni/index.html](http://docs.oracle.com/javase/8/docs/technotes/guides/jni/index.html)
+
 
 
 See also Java Platform Debugger Architecture (JPDA) at
 http://docs.oracle.com/javase/8/docs/technotes/guides/jpda/index.html
 
-参见Java平台调试器体系结构(JPDA)
-http://docs.oracle.com/javase/8/docs/technotes/guides/jpda/index.html
+参见Java平台调试器体系结构(JPDA, Java Platform Debugger Architecture):  
+[http://docs.oracle.com/javase/8/docs/technotes/guides/jpda/index.html](http://docs.oracle.com/javase/8/docs/technotes/guides/jpda/index.html)
 
 
-### /jdk1.8.0/man
-
+> /jdk1.8.0/man
 
 
 
 Contains man pages for the JDK tools.
 
-包含JDK工具的手册页。
+包含JDK tools 的手册页面。
 
 
 原文链接: [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jdkfiles.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jdkfiles.html)
