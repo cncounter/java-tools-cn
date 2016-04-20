@@ -79,27 +79,27 @@ In effect, the three search paths together form a simple class path. This is sim
 
 Bootstrap classes are the classes that implement Java SE. Bootstrap classes are in the rt.jar file and several other JAR files in the jre/lib directory. These archives are specified by the value of the bootstrap class path that is stored in the sun.boot.class.path system property. This system property is for reference only and should not be directly modified.It is unlikely that you will need to redefine the bootstrap class path. The nonstandard option, -Xbootclasspath, allows you to do so in those rare circumstances in which it is necessary to use a different set of core classes.
 
-引导类的类实现Java SE。引导rt.jar文件中的类和其他几个JAR文件在jre / lib目录中.这些档案规定的值存储在sun.boot.class引导类路径。道路系统属性.这个系统属性仅供参考,不应直接修改。您将需要重新定义不太可能引导类路径.《nonstandard备选办法,-Xbootclasspath、致you to do na in身上罕见circumstances囚犯在没有必要使用了不同的完整core职等。
+引导类就是Java SE的实现类。位于 rt.jar 和 jre/lib 目录下的其他几个 JAR 文件中. 这些文件由 `sun.boot.class.path` 属性所指定,叫做 **bootstrap class path**。 这个系统属性只能引用, 不应直接修改。一般来说您不需要重新指定引导类路径. 有一个非标准选项, `-Xbootclasspath`、允许你在极端情况下指定使用其他地方的核心类。
 
 
 Note that the classes that implement the JDK tools are in a separate archive from the bootstrap classes. The tools archive is the JDK /lib/tools.jar file. The development tools add this archive to the user class path when invoking the launcher. However, this augmented user class path is only used to execute the tool. The tools that process source code, the javac command, and the javadoc command, use the original class path, not the augmented version. For more information, see How the javac and javadoc Commands Find Classes.
 
-注意,在一个单独的类,实现JDK工具从引导类档案。档案是JDK /lib/tools.的工具jar文件.开发工具将这个档案添加到用户类路径调用发射器。然而,这种增强用户类路径是仅用于执行工具.过程的工具源代码,javac命令,和javadoc命令,使用原始的类路径,而不是增强版本.有关更多信息,请参见如何javac和javadoc命令找到类。
+注意, 实现了JDK工具的类和引导类位于不同的jar文件之中。工具类位于 `/lib/tools.jar` 文件. 开发工具在启动时将这个jar添加到用户类路径。然而, 这种增强的用户类路径只用于执行工具. 而处理源代码的工具, 例如 `javac` 命令,和 `javadoc` 命令,使用的是原始的类路径, 而不是增强版本. 有关更多信息,请参考下面的 [javac和javadoc命令如何找到类]()。
 
 
 ## How the Java Runtime Finds Extension Classes
 
-## Java运行时发现扩展类如何
+## Java运行时如何发现扩展类
 
 
 Extension classes are classes that extend the Java platform. Every .jar file in the extension directory, jre/lib/ext, is assumed to be an extension and is loaded with the Java Extension Framework. Loose class files in the extension directory are not found. They must be contained in a JAR file or Zip file. There is no option provided for changing the location of the extension directory.
 
-扩展类的类扩展Java平台。每一个。扩展目录中的jar文件,jre / lib / ext,被认为是一个扩展和加载的Java扩展框架.宽松的扩展目录中的类文件没有找到。他们必须包含在一个JAR文件或Zip文件。没有提供选项改变扩展目录的位置。
+扩展类(Extension classes)是扩展Java平台的类。每一个位于 `jre/lib/ext` 目录下的 jar 文件, 都被当做扩展类, 由 Java Extension Framework 负责加载. 没有打成 jar 包的 class 文件不会被加载。他们必须包含在一个JAR文件或Zip文件中。没有任何选项来改变扩展目录的位置。
 
 
 If the jre/lib/ext directory contains multiple JAR files, and those files contain classes with the same name such as in the following example, the class that actually gets loaded is undefined.
 
-如果jre / lib / ext目录下包含多个JAR文件,这些文件包含具有相同名称的类,如在下面的例子中,实际加载的类定义。
+如果 `jre/lib/ext` 目录下包含多个JAR文件, 而这些文件中又包含了具有相同名称的类, 例如下面的例子, 则实际加载到哪一个是不确定的。
 
 
 > smart-extension1_0.jar contains class smart.extension.Smart
@@ -109,46 +109,55 @@ If the jre/lib/ext directory contains multiple JAR files, and those files contai
 
 ## How the Java Runtime Finds User Classes
 
-## Java运行时发现用户类如何
+## Java运行时如何发现用户类
 
 
 To find user classes, the launcher refers to the user class path, which is a list of directories, JAR files, and Zip files that contain class files.
 
-找到用户类,发射器是指用户类路径,这是一个目录列表,JAR文件和Zip文件包含类文件。
+加载器根据用户类路径来查找用户类, 这是一个包含类文件的列表, 其中可以包含 目录, JAR文件和Zip文件。
 
 
 A class file has a subpath name that reflects the fully-qualified name of the class. For example, if the class com.mypackage.MyClass is stored under myclasses, then myclasses must be in the user class path, and the full path to the class file must be /myclasses/com/mypackage/MyClass.class on Oracle Solaris or in \myclasses\com\mypackage\MyClass.class on Windows.
 
-一个类文件的子路径的名字反映了类的完全限定名称。例如,如果类com.mypackage.MyClass存储在MyClass,那么必须在用户MyClass类路径,和类文件的完整路径必须/ MyClass /com/mypackage/MyClass.类在Oracle Solaris或\ MyClass \ com \ mypackage \ MyClass。类在Windows。
+包含子路径的类文件名字反映了类的完全限定名称。例如,如果类 `com.mypackage.MyClass` 存储在 myclasses 目录下, 那么必须将 `myclasses` 设置到用户类路径之中, 而且类文件的完整路径, 在Linux或者 Unix下必须是 `/myclasses/com/mypackage/MyClass.class`。在Windows上 必须是`\myclasses\com\mypackage\MyClass.class`。
 
 
 If the class is stored in an archive named myclasses.jar, then myclasses.jar must be in the user class path, and the class file must be stored in the archive as com/mypackage/MyClass.class on Windows or in com\mypackage\MyClass.class on Oracle Solaris.
 
-如果类存储在一个名为myclass的档案。jar,然后myclass。jar必须在用户类路径中,必须存储在类文件归档com/mypackage/MyClass.类在Windows或com \ mypackage \ MyClass。类在Oracle Solaris。
+如果类被打包在  myclasses.jar 文件中, 那么 ` myclasses.jar` 必须加入到用户类路径中, 而 class 文件也必须存放在 jar 文件的 `com/mypackage/MyClass.class` 位置。
 
 
 The user class path is specified as a string, with a colon (:) to separate the class path entries on Oracle Solaris, and a semicolon (;) to separate the entries on Windows systems. The Java launcher puts the user class path string in the java.class.path system property. The possible sources of this value are:
 
-用户类路径指定为一个字符串,用冒号(:)在Oracle Solaris,单独的类路径条目和分号(;)来分离在Windows系统上的条目.Java启动程序将java.class用户类路径字符串。道路系统属性。这个值的可能的来源有:
+用户类路径通过一个字符串来指定, 在Oracle Solaris或者Linux上通过英文冒号(:)来分隔, 在Windows系统上通过英文分号(;)来分隔. Java启动程序将用户类路径字符串设置到给`java.class.path` 这个系统属性。这个值可能的来源有:
 
 
 * The default value, *.*, which means that user class files are all the class files in or under the current directory.
 
+* 默认值 `*.*` ,意思是当前目录下的所有 class 文件都是用户类。 
+
 * The value of the CLASSPATH environment variable that overrides the default value.
+
+* 环境变量 **CLASSPATH** 如果有值,则会覆盖默认值。
 
 
 * The value of the -cp or -classpath command-line option that overrides both the default value and the CLASSPATH value.
 
+* 命令行选项 `-cp` 或者 `-classpath` 的值,会覆盖 默认值以及 CLASSPATH 的值。
+
+
 * The JAR archive specified by the -jar option overrides all other values if it contains a Class-Path entry in its manifest. If this option is used, all user classes must come from the specified archive.
 
 
-* 指定的JAR归档JAR选项覆盖所有其他值如果它包含一个类路径条目清单.如果使用这个选项,所有用户类必须来自指定的档案。
+* 通过 `-jar` 选项指定的 JAR 文件, 如果其 manifest 中指定了`Class-Path` 条目, 则会覆盖所有其他的值. 如果是这样, 那么所有的用户类都必须来自指定的jar文件。
 
 
 ## How the Java Runtime Finds JAR-class-path Classes
 
-## Java运行时发现JAR-class-path类如何
+## Java运行时如何发现 JAR-class-path 的类
 
+
+## TODO
 
 A JAR file usually contains a manifest, which is a file that lists the contents of the JAR file. The manifest can define a JAR class path, which further extends the class path, but only while loading classes from that JAR file. Classes accessed by a JAR class path are found in the following order:
 
@@ -171,9 +180,11 @@ A JAR file usually contains a manifest, which is a file that lists the contents 
 
 
 ## How the javac and javadoc Commands Find Classes
-The javac and javadoc commands use class files in the following two ways:
 
 ## javac和javadoc命令如何找到类
+
+The javac and javadoc commands use class files in the following two ways:
+
 使用javac和javadoc命令类文件在以下两个方面:
 
 
