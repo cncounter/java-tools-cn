@@ -2,12 +2,12 @@
 
 Prints Java thread stack traces for a Java process, core file, or remote debug server. This command is experimental and unsupported.
 
-打印Java线程堆栈跟踪Java进程,核心文件,或远程调试服务器。这个命令是经验性的和不支持的。
+打印Java线程栈跟踪, 目标可以是 Java进程, core文件,或支持远程调试的服务器。此命令是实验性质的,官方不提供服务支持。
 
 
 ### Synopsis
 
-### 剧情简介
+### 简介
 
 
 	jstack [ options ] pid
@@ -19,19 +19,17 @@ Prints Java thread stack traces for a Java process, core file, or remote debug s
 
 #### options
 
-#### 选项
-
 
 The command-line options. See Options.
 
-命令行选项。看到选项。
+支持的命令行选项。请查看下方的 [选项] 部分。
 
 
 #### pid
 
 The process ID for which the stack trace is printed. The process must be a Java process. To get a list of Java processes running on a machine, use the jps(1) command.
 
-打印堆栈跟踪的进程ID。这个过程必须是一个Java进程。得到一组Java进程运行在一台计算机上,使用jps(1)命令。
+进程ID, 要打印线程栈跟踪信息的进程ID，必须是一个Java进程。要获得某台机器上的 Java进程列表, 请使用 `jps` 命令。
 
 
 #### executable
@@ -45,21 +43,21 @@ Java可执行的核心转储。
 
 The core file for which the stack trace is to be printed.
 
-堆栈跟踪的核心文件打印。
+核心文件, 要显示堆栈跟踪信息的核心文件。
 
 
 #### remote-hostname-or-IP
 
 The remote debug server hostname or IP address. See jsadebugd(1).
 
-远程调试服务器主机名或IP地址。看到jsadebugd(1)。
+支持远程调试的服务器的主机名或IP地址。详情请参考 `jsadebugd` 命令。
 
 
 #### server-id
 
 An optional unique ID to use when multiple debug servers are running on the same remote host.
 
-一个可选的惟一的ID时使用多个调试服务器都运行在相同的远程主机。
+可选参数, 如果远程主机上同时运行了多个支持远程调试的服务器, 则需要指定唯一ID。
 
 
 ### Description
@@ -89,7 +87,7 @@ jstack命令打印Java Java线程的堆栈跟踪指定的Java进程,核心文件
 
 Force a stack dump when jstack [-l] pid does not respond.
 
-力堆栈转储当jstack[- l]pid不回应。
+如果 `jstack [-l] pid` 不响应, 则强制进行 stack 转储。
 
 
 #### -l
@@ -97,39 +95,39 @@ Force a stack dump when jstack [-l] pid does not respond.
 Long listing. Prints additional information about locks such as a list of owned java.util.concurrent ownable synchronizers. See the AbstractOwnableSynchronizer class description at
 http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractOwnableSynchronizer.html
 
-长清单。打印关于锁的额外信息,如一个拥有java.util列表。并发ownable某个浏览器。看到AbstractOwnableSynchronizer类描述
-http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractOwnableSynchronizer.html
+打印详细信息(Long listing)。打印关于锁的额外信息, 如持有 `java.util.concurrent` 的锁定者。详情请参考 `AbstractOwnableSynchronizer` 类的描述信息:
+[http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractOwnableSynchronizer.html](http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractOwnableSynchronizer.html)
 
 
 #### -m
 
 Prints a mixed mode stack trace that has both Java and native C/C++ frames.
 
-打印一个混合模式堆栈跟踪Java和C / c++框架。
+打印混合模式(mixed mode)的堆栈跟踪, 包括Java和C/C++框架。
 
 
 #### -h
 
 Prints a help message.
 
-打印帮助消息。
+打印帮助(help)信息。
 
 
 #### -help
 
 Prints a help message.
 
-打印帮助消息。
+打印帮助(help)信息。
 
 
 ### Known Bugs
 
-### 已知的错误
+### 已知的Bug
 
 
 In mixed mode stack trace, the -m option does not work with the remote debug server.
 
-在混合模式堆栈跟踪,- m选项不使用远程调试服务器。
+在混合模式下, `-m` 选项不支持远程调试服务器。
 
 
 ### See Also
