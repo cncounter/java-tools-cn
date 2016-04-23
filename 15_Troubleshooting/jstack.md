@@ -10,6 +10,7 @@ Prints Java thread stack traces for a Java process, core file, or remote debug s
 
 	jstack [ options ] [ server-id@ ] remote-hostname-or-IP
 
+
 #### options
 
 The command-line options. See Options.
@@ -74,3 +75,6 @@ In mixed mode stack trace, the -m option does not work with the remote debug ser
 - jps(1)
 
 - jsadebugd(1)
+
+原文链接: [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstack.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstack.html)
+
