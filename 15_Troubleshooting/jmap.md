@@ -70,6 +70,7 @@ Prints information about objects that are awaiting finalization.
 Prints a heap summary of the garbage collection used, the head configuration, and generation-wise heap usage. In addition, the number and size of interned Strings are printed.
 
 输出垃圾收集使用的堆内存汇总信息,包括 head 配置和各个分代(generation-wise)的堆使用情况。此外,也会输出内部化字符串(interned Strings)的数量和大小。
+(建议: 不要在生产环境执行 jmap -heap)
 
 > 示例: `jmap -heap 6578`
 
