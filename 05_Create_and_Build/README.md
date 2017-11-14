@@ -21,7 +21,7 @@ This section contains the following commands:
 
 - 5.7 [`javah`](javah.html#BJECIACA): Generates C header and source files from a Java class.
 
-- 5.8 [`javap`](05_08_javap.md): 反编译(Disassembles)一到多个 `class` 文件.
+- 5.8 [`javap`](05_08_javap.md): 展开(Disassembles)一到多个 `class` 文件.
 
 - 5.9 [`jdb`](jdb.html#CHDFHFDB): Finds and fixes bugs in Java platform programs.
 

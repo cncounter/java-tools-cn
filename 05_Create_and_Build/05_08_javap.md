@@ -3,7 +3,7 @@
 
 Disassembles one or more class files.
 
-反编译(Disassembles)一到多个 `class` 文件
+展开(Disassembles)一到多个 `class` 文件
 
 ## javap概述(Synopsis)
 
@@ -27,6 +27,10 @@ One or more classes separated by spaces to be processed for annotations such as 
 ## 说明(Description)
 
 The `javap` command disassembles one or more class files. The output depends on the options used. When no options are used, then the `javap` command prints the package, protected and public fields, and methods of the classes passed to it. The `javap` command prints its output to `stdout`.
+
+`javap` 命令展开一个/或多个 class 文件。可以通过命令选项控制输出的具体内容。如果不指定任何选项, 则打印出 package, protected 和 public 字段(fields), 以及参数中指定 class 的方法。 `javap`命令的结果内容输出到 `stdout`。
+
+
 
 ## 选项(Options)
 
