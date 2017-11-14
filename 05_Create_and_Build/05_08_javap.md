@@ -38,19 +38,17 @@ The `javap` command disassembles one or more class files. The output depends on 
   Shows all classes and members.
 * `-J_xxxoption_`
   Passes the specified option to the JVM. For example:
-```
-javap -J-version
-javap -J-Djava.security.manager -J-Djava.security.policy=MyPolicy MyClassName
-```
+  ```
+  javap -J-version
+  javap -J-Djava.security.manager -J-Djava.security.policy=MyPolicy MyClassName
+  ```
   For more information about JVM options, see the `[java`](java.html#CBBFHAJA) command documentation.
 * `-s`
   Prints internal type signatures.
 * `-sysinfo`
   Shows system information (path, size, date, MD5 hash) of the class being processed.
-
 * `-constants`
   Shows `static final` constants.
-
 * `-c`
   Prints disassembled code, for example, the instructions that comprise the Java bytecodes, for each of the methods in the class.
 * `-verbose`
