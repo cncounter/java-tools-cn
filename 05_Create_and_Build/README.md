@@ -4,6 +4,7 @@ Use the following commands to create and build applications:
 
 This section contains the following commands:
 
+本章介绍应用程序构建相关的命令, 包括:
 
 
 - 5.1 [`appletviewer`](appletviewer.html#BGBJAJHC): Runs applets outside of a web browser.
@@ -20,7 +21,7 @@ This section contains the following commands:
 
 - 5.7 [`javah`](javah.html#BJECIACA): Generates C header and source files from a Java class.
 
-- 5.8 [`javap`](05_08_javap.md): Disassembles one or more class files.
+- 5.8 [`javap`](05_08_javap.md): 反编译(Disassembles)一到多个 `class` 文件.
 
 - 5.9 [`jdb`](jdb.html#CHDFHFDB): Finds and fixes bugs in Java platform programs.
 

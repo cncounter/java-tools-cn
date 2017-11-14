@@ -3,6 +3,7 @@
 
 Disassembles one or more class files.
 
+反编译(Disassembles)一到多个 `class` 文件
 
 ## Synopsis
 
