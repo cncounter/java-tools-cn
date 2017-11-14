@@ -13,7 +13,7 @@ This section contains the following commands:
 
 - 5.3 [`jar`](jar.html#BGBEJEEG): Combines multiple files into a single JAR file.
 
-- 5.4 [`java`](java.html#CBBFHAJA): Starts a Java application.
+- 5.4 [`java`](05_04_java.md): 启动 Java 程序.
 
 - 5.5 [`javac`](javac.html#BHCJCBFB): Reads Java class and interface definitions and compiles them into bytecode and class files.
 

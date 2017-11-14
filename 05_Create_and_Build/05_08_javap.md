@@ -35,25 +35,25 @@ The `javap` command disassembles one or more class files. The output depends on 
 ## 选项(Options)
 
 * `-help`, `--help`, `-?`
-  Prints a help message for the `javap` command.
+  打印出 `javap` 命令的帮助信息.
 
 * `-version`
-  Prints release information.
+  打印出 `javap` 命令的版本(release)信息.
 * `-l`
-  Prints line and local variable tables.
+  打印出行号(line)以及局部变量表(local variable tables).
 * `-public`
-  Shows only public classes and members.
+  只显示 public 类和成员.
 * `-protected`
-  Shows only protected and public classes and members.
+  只显示 protected/public 类和成员.
 * `-private`, `-p`
-  Shows all classes and members.
+  显示所有的类和成员(all classes and members).
 * `-J_xxxoption_`
-  Passes the specified option to the JVM. For example:
+  传递给底层JVM的参数. 例如:
   ```
   javap -J-version
   javap -J-Djava.security.manager -J-Djava.security.policy=MyPolicy MyClassName
   ```
-  For more information about JVM options, see the `[java`](java.html#CBBFHAJA) command documentation.
+  更多 JVM option 的信息, 请参考 `[java`](05_04_java.md) 命令的官方文档.
 * `-s`
   Prints internal type signatures.
 * `-sysinfo`
@@ -181,7 +181,7 @@ java/awt/Graphics.drawString:(Ljava/lang/String;II)V
 
 ## See Also
 
-*   [`java`(1)](java.html#CBBFHAJA)
+*   [`java`(1)](05_04_java.md)
 
 *   [`javac`(1)](javac.html#BHCJCBFB)
 
