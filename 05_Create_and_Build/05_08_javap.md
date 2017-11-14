@@ -5,7 +5,7 @@ Disassembles one or more class files.
 
 反编译(Disassembles)一到多个 `class` 文件
 
-## Synopsis
+## javap概述(Synopsis)
 
 > **javap** _options_ _classfile_ ...
 
@@ -13,16 +13,22 @@ Disassembles one or more class files.
 
 The command-line options. See Options.
 
+命令行参数, 请参考下方的选项(Options)部分。 
+
 - _classfile_
 
-One or more classes separated by spaces to be processed for annotations such as DocFooter.class. You can specify a class that can be found in the class path, by its file name or with a URL such as `file:///home/user/myproject/src/DocFooter.class`.
+One or more classes separated by spaces to be processed for annotations such as `DocFooter.class`. You can specify a class that can be found in the class path, by its file name or with a URL such as `file:///home/user/myproject/src/DocFooter.class`.
+
+参数为一到多个 class 文件, 使用空格分隔, 例如 `DocFooter.class`。可以是 class path 中的某个类, 例如文件名或者是文件URL, 如 `file:///home/user/myproject/src/DocFooter.class`。
 
 
-## Description
+
+
+## 说明(Description)
 
 The `javap` command disassembles one or more class files. The output depends on the options used. When no options are used, then the `javap` command prints the package, protected and public fields, and methods of the classes passed to it. The `javap` command prints its output to `stdout`.
 
-## Options
+## 选项(Options)
 
 * `-help`, `--help`, `-?`
   Prints a help message for the `javap` command.
