@@ -55,21 +55,21 @@ The `javap` command disassembles one or more class files. The output depends on 
   ```
   更多 JVM option 的信息, 请参考 `[java`](05_04_java.md) 命令的官方文档.
 * `-s`
-  Prints internal type signatures.
+  打印内部类型签名(internal type signatures).
 * `-sysinfo`
-  Shows system information (path, size, date, MD5 hash) of the class being processed.
+  显示class文件的系统信息(如文件路径(path), 大小(size), 修改日期(date), 以及MD5 hash).
 * `-constants`
-  Shows `static final` constants.
+  显示 `static final` 常量信息.
 * `-c`
-  Prints disassembled code, for example, the instructions that comprise the Java bytecodes, for each of the methods in the class.
+  打印反编译后的代码(disassembled code), 例如, 以指令(instructions)的方式展示 class 中每个方法的字节码.
 * `-verbose`
-  Prints stack size, number of locals and arguments for methods.
+  打印 stack size, 局部变量number of locals and arguments for methods.
 * `-classpath _path_`
-  Specifies the path the `javap` command uses to look up classes. Overrides the default or the `CLASSPATH` environment variable when it is set.
+  指定 `javap` 命令查找 class 时所使用的 classpath 路径. 如果指定该参数, 则会覆盖默认的系统环境变量 `CLASSPATH` 值.
 * `-bootclasspath _path_`
-  Specifies the path from which to load bootstrap classes. By default, the bootstrap classes are the classes that implement the core Java platform located in `jre/lib/rt.jar` and several other JAR files.
+  指定加载 bootstrap 类的路径. 默认情况下, bootstrap classes 从Java安装目录下的  `jre/lib/rt.jar` 以及其他几个 JAR 包中加载.
 * `-extdir _dirs_`
-  Overrides the location at which installed extensions are searched for. The default location for extensions is the value of `java.ext.dirs`.
+  手工指定安装 extensions 的查找目录. 默认 extensions 目录由 `java.ext.dirs` 的值指定.
 
 
 ## Example
