@@ -72,9 +72,9 @@ The `javap` command disassembles one or more class files. The output depends on 
   手工指定安装 extensions 的查找目录. 默认 extensions 目录由 `java.ext.dirs` 的值指定.
 
 
-## Example
+## 示例
 
-Compile the following `DocFooter` class:
+下面是 `DocFooter` 类的Java代码:
 
 ```
 import java.awt.*;
@@ -98,7 +98,7 @@ public class DocFooter extends Applet {
 
 ```
 
-The output from the `javap DocFooter.class` command yields the following:
+编译之后, 执行 `javap DocFooter.class` 命令, 结果如下:
 
 ```
 Compiled from "DocFooter.java"
@@ -112,7 +112,7 @@ public class DocFooter extends java.applet.Applet {
 
 ```
 
-The output from `javap -c DocFooter.class` command yields the following:
+如果加上 `-c` 选项, 执行 `javap -c DocFooter.class` 后结果如下:
 
 ```
 Compiled from "DocFooter.java"
@@ -179,7 +179,7 @@ java/awt/Graphics.drawString:(Ljava/lang/String;II)V
 
 ```
 
-## See Also
+## 更多信息请参考
 
 *   [`java`(1)](05_04_java.md)
 
