@@ -21,7 +21,7 @@ This section contains the following commands:
 
 - [`jps`](1301.md):    尚处于实验阶段。 列出在目标机器上可见的(如同一个用户的),正在运行的JVM。
 - [`jstat`](1302.md):  尚处于实验阶段。 监控Java虚拟机统计数据。
-- [`jstatd`](1303.md): 尚处于实验阶段。 监控Java虚拟机,使得远程监控工具可以连接JVM。
+- [`jstatd`](1303.md): 尚处于实验阶段。 监控Java虚拟机,使得远程监控工具可以连接到本机的JVM。
 - [`jmc`](1304.md):    启动 Java Mission Controla 工具, 用来监控和管理Java应用以及JVM。
 
 
