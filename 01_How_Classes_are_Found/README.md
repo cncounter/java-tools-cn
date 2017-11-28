@@ -1,4 +1,6 @@
-# 1. Java如何找到Class
+# 1 How Classes are Found
+
+# 1. Java如何查找Class
 
 
 The java command is called the Java launcher because it launches Java applications. When the Java launcher is called, it gathers input from the user and the user's environment (such as the class path and the boot class path), interfaces with the Virtual Machine (VM), and gets it started via some bootstrapping. The Java Virtual Machine (JVM) does the rest of the work.
