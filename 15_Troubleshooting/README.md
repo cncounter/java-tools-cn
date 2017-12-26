@@ -4,14 +4,14 @@ Use these commands to troubleshoot Java applications and the Java Virtual Machin
 
 This section contains the following commands:
 
-jcmd: Sends diagnostic command requests to a running JVM.
+[`jcmd`](jcmd.md): Sends diagnostic command requests to a running JVM.
 
-jinfo: Experimental. Generates configuration information.
+[`jinfo`](jinfo.md): Experimental. Generates configuration information.
 
-jhat: Experimental. Analyzes the Java heap.
+[`jhat`](jhat.md): Experimental. Analyzes the Java heap.
 
-jmap: Experimental. Prints shared object memory maps or heap memory details for a process, core file, or remote debug server.
+[`jmap`](jmap.md): Experimental. Prints shared object memory maps or heap memory details for a process, core file, or remote debug server.
 
-jsadebugd: Experimental. Attaches to a Java process or core file and acts as a debug server.
+[`jsadebugd`](jsadebugd.md): Experimental. Attaches to a Java process or core file and acts as a debug server.
 
-jstack: Experimental. Prints Java thread stack traces for a Java process, core file, or remote debug server.
+[`jstack`](jstack.md): Experimental. Prints Java thread stack traces for a Java process, core file, or remote debug server.
