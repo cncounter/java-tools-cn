@@ -2,27 +2,27 @@
 
 Prints Java thread stack traces for a Java process, core file, or remote debug server. This command is experimental and unsupported.
 
-打印Java线程栈跟踪, 目标可以是 Java进程, core文件,或支持远程调试的服务器。此命令是实验性质的,官方不提供服务支持。
+打印Java线程栈跟踪信息, 目标可以是 Java进程, core文件,或支持远程调试的服务器。此命令是实验性质的,官方不提供服务支持。
 
 
 ### Synopsis
 
 ### 简介
 
+```
+jstack [ *options* ] pid
 
-	jstack [ options ] pid
+jstack [ *options* ] executable core
 
-	jstack [ options ] executable core
-
-	jstack [ options ] [ server-id@ ] remote-hostname-or-IP
-
+jstack [ *options* ] [ *server-id*@ ] remote-hostname-or-IP
+```
 
 #### options
 
 
 The command-line options. See Options.
 
-支持的命令行选项。请查看下方的 [选项] 部分。
+jstack支持的命令行选项。请参考下面的 [选项] 部分。
 
 
 #### pid
