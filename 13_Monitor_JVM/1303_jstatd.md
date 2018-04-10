@@ -7,7 +7,7 @@
 
 **jstatd** [ _options_ ]`_options_`
 
-命令行选项参数。请参考下方的 [Options](#) 部分。
+命令行选项参数。请参考下方的 [选项(Options)](#options) 部分。
 
 ## jstatd简介
 
@@ -17,7 +17,7 @@
 `jstatd` 服务端需要本机存在 RMI注册服务(RMI registry)。在 `jstatd` 服务启动时,会尝试连接默认的RMI注册端口, 当然, 也可以通过 `-p port_num` 选项来指定这个端口号。如果没有找到RMI注册服务, 则会自动创建一个内置的 RMI注册服务, 端口号通过 `-p` 参数指定, 不指定则使默认值。如果不想创建 RMI注册服务, 可以通过 `-nr` 选项启动。
 
 
-## 选项(Options)
+## <a name="options">选项(Options)</a>
 
 * `-nr`
   如果没有找到RMI注册服务, 禁止 `jstatd` 在进程内创建RMI注册服务。
