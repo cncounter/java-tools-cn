@@ -17,7 +17,7 @@ jstat [ generalOption | outputOptions vmid [ interval[s|ms] [ count ] ]
 
   A single general command-line option -help or -options. See General Options.
 
-  通用选项，只支持单个，如 `-help` 或者 `-options`。 详细信息请参考下文。
+  常规选项，只支持单个，如 `-help` 或者 `-options`。 详细信息请参考下文。
 
 - outputOptions
 
@@ -118,7 +118,7 @@ The syntax of the `vmid` string corresponds to the syntax of a URI:
 
 The `jstat` command supports two types of options, general options and output options. General options cause the `jstat` command to display simple usage and version information. Output options determine the content and format of the statistical output.
 
-`jstat`命令支持两种类型的选项，通用选项和输出选项。 通用选项只用于显示简单的用法和版本信息。 输出选项则决定了统计信息的输出内容/格式。
+`jstat`命令支持两种类型的选项，常规选项和输出选项。 常规选项只用于显示简单的用法和版本信息。 输出选项决定了输出的内容/格式。
 
 All options and their functionality are subject to change or removal in future releases.
 
@@ -128,12 +128,12 @@ All options and their functionality are subject to change or removal in future r
 
 ### General Options
 
-### 通用选项（General Options）
+### 常规选项（General Options）
 
 
 If you specify one of the general options, then you cannot specify any other option or parameter.
 
-如果指定了一个通用选项，则不能再指定其他选项。
+如果指定了一个常规选项，则不能再指定其他选项。
 
 - `-help`
 
@@ -155,60 +155,111 @@ jstat -help
 jstat -options
 ```
 
+只有第一个常规选项有效, 后面的被忽略:
+
+```
+jstat -help -options -gc 0000
+jstat -options -help -gc 0000
+```
+
 
 ### Output Options
 
+### 输出选项（Output Options）
+
 If you do not specify a general option, then you can specify output options. Output options determine the content and format of the `jstat` command's output, and consist of a single `statOption`, plus any of the other output options (`-h`, `-t`, and `-J`). The `statOption` must come first.
+
+如果不指定常规选项，则可以指定输出选项。 输出选项决定了输出的内容/格式，由单个`statOption`部分，加上其他输出选项（`-h`，`-t`和`-J`）组成。 而且`statOption`必须放在前面。
 
 Output is formatted as a table, with columns that are separated by spaces. A header row with titles describes the columns. Use the `-h` option to set the frequency at which the header is displayed. Column header names are consistent among the different options. In general, if two options provide a column with the same name, then the data source for the two columns is the same.
 
+输出被格式化为表格(table)，两列之间由空格分隔。 标题行描述了各个列的信息。 使用 `-h` 选项设置标题行出现的频率。 每个列的标题，在各种输出选项中都是一致的。 一般来说，如果两个输出选项的列具有相同的名称，那么这两列的数据来源就是一样的。
+
 Use the `-t` option to display a time stamp column, labeled Timestamp as the first column of output. The Timestamp column contains the elapsed time, in seconds, since the target JVM started. The resolution of the time stamp is dependent on various factors and is subject to variation due to delayed thread scheduling on heavily loaded systems.
+
+使用`-t`选项，在第一列加上时间戳列，列名为Timestamp。 Timestamp列是目标JVM启动后经历的时间（以秒为单位）。 时间戳的精度可能受各种因素的影响，比如在负载很高的机器上, 线程调度造成的延迟可能就不一致。
 
 Use the interval and count parameters to determine how frequently and how many times, respectively, the `jstat` command displays its output.
 
+interval 参数决定了 `jstat` 命令输出的频率，  count 参数决定了 `jstat` 命令输出的次数。
+
 **Note:** Do not to write scripts to parse the `jstat` command's output because the format might change in future releases. If you write scripts that parse `jstat` command output, then expect to modify them for future releases of this tool.
+
+**官方警告：** 最好不要编写脚本来解析`jstat`命令的输出，因为在将来的JDK版本中可能会发生改变。 如果已经编写了解析脚本，那么最好也为新版本的JDK做好修改的准备。 蕴含的意思是说，最好花钱买JDK11以后提供的全家桶工具包。
 
 
 - **-statOption**
 
   Determines the statistics information the jstat command displays. The following lists the available options. Use the -options general option to display the list of options for a particular platform installation. See Stat Options and Output.
 
+  状态选项决定了 jstat 命令输出哪些统计信息。可以使用常规选项 `-options` 查看支持的选项。 详细信息请参考下文。下面是可用的状态选项列表。 
+
   `class`: Displays statistics about the behavior of the class loader.
+
+  `class`: 显示 class loader 相关的统计信息。 示例: `jstat -class 8640`
 
   `compiler`: Displays statistics about the behavior of the Java HotSpot VM Just-in-Time compiler.
 
+  `compiler`: 显示即时编译器(Just-in-Time)相关的统计信息。
+
   `gc`: Displays statistics about the behavior of the garbage collected heap.
+
+  `gc`: 显示堆内存与GC相关的统计信息。这里的信息不包含各个内存池的最大容量。
 
   `gccapacity`: Displays statistics about the capacities of the generations and their corresponding spaces.
 
+  `gccapacity`: 显示有关各个内存池相关的统计信息。
+
   `gccause`: Displays a summary about garbage collection statistics (same as -gcutil), with the cause of the last and current (when applicable) garbage collection events.
+
+  `gccause`: 显示垃圾收集相关的汇总统计信息（与 `-gcutil` 类似），但在最后面加上，上次GC的原因（LGCC）, 和当前GC的原因（GCC, 如果处于GC过程中的话）。 示例: `jstat -gccause -h 5 19629 5s`
 
   `gcnew`: Displays statistics of the behavior of the new generation.
 
+  `gcnew`: 显示新生代(new generations)行为相关的统计信息。
+
   `gcnewcapacity`: Displays statistics about the sizes of the new generations and its corresponding spaces.
+
+  `gcnewcapacity`: 显示新生代(new generations)和相关空间大小的统计信息。
 
   `gcold`: Displays statistics about the behavior of the old generation and metaspace statistics.
 
+  `gcold`: 显示老年代和metaspace内存空间相关的统计信息。
+
   `gcoldcapacity`: Displays statistics about the sizes of the old generation.
+
+  `gcoldcapacity`: 显示老年代内存空间大小相关的统计信息。
 
   `gcmetacapacity`: Displays statistics about the sizes of the metaspace.
 
+  `gcmetacapacity`: 显示 metaspace 内存空间大小相关的统计信息。
+
   `gcuti`l: Displays a summary about garbage collection statistics.
 
+  `gcuti`l: 显示垃圾收集相关的汇总统计信息.
+
   `printcompilation`: Displays Java HotSpot VM compilation method statistics.
+
+  `printcompilation`: 显示 Java HotSpot VM 方法编译相关的统计信息。
 
 
 - `-h n`
 
   Displays a column header every *n* samples (output rows), where *n* is a positive integer. Default value is 0, which displays the column header the first row of data.
 
+  每隔n行数据,打印一次列标题，其中*n*是一个正整数。 默认值为0，只在第一行显示列标题。
+
 - `-t`
 
   Displays a timestamp column as the first column of output. The time stamp is the time since the start time of the target JVM.
 
+  在第一列加上时间戳列，列名为Timestamp。 Timestamp列是目标JVM启动后经历的时间（以秒为单位）
+
 - `-JjavaOption`
 
   Passes `javaOption` to the Java application launcher. For example, `-J-Xms48m` sets the startup memory to 48 MB. For a complete list of options, see [`java`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html#CBBFHAJA).
+
+  将JVM启动参数 `javaOption` 传递给应用启动程序. 例如, `-J-Xms48m` 将初始内存设置为 48 MB. 完整的JVM启动参数列表请参考Java命令.
 
 
 
