@@ -2,69 +2,111 @@
 
 Monitors Java Virtual Machine (JVM) statistics. This command is experimental and unsupported.
 
-
+监控Java虚拟机（JVM）的统计信息。 jstat命令是实验性质的，官方客服不提供技术支持。
 
 ## Synopsis
 
-**jstat** [ *generalOption* | *outputOptions vmid* [ *interval*[s|ms] [ *count* ] ]
+## 概述
+
+
+```
+jstat [ generalOption | outputOptions vmid [ interval[s|ms] [ count ] ]
+```
 
 - generalOption
 
   A single general command-line option -help or -options. See General Options.
 
+  通用选项，只支持单个，如 `-help` 或者 `-options`。 详细信息请参考下文。
+
 - outputOptions
 
   One or more output options that consist of a single `statOption`, plus any of the `-t`, `-h`, and `-J` options. See [Output Options](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstat.html#BEHIGDGJ).
+
+  输出选项, 可包含单个 `statOption`，加上任意数量的 `-t`，`-h` 和 `-J` 选项。 详细信息请参考下文。
 
 - vmid
 
   Virtual machine identifier, which is a string that indicates the target JVM. The general syntax is the following:
   
+  虚拟机标识符(virtual machine identifier)，是一个字符串， 用于明确指示目标JVM。 一般语法如下：
+
   `[protocol:][//]lvmid[@hostname[:port]/servername] `
   
   The syntax of the `vmid` string corresponds to the syntax of a URI. The `vmid` string can vary from a simple integer that represents a local JVM to a more complex construction that specifies a communications protocol, port number, and other implementation-specific values. See [Virtual Machine Identifier](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstat.html#BEHBCGCA).
+
+  `vmid`字符串的语法类似于URI。 可以是一个数字，表示本地JVM； 或者是由多个部分组成的复杂结构：通信协议，端口号，以及其他特定实现相关的值。 详细信息请参考下文。
 
 - interval [s|ms]
 
   Sampling interval in the specified units, seconds (s) or milliseconds (ms). Default units are milliseconds. Must be a positive integer. When specified, the `jstat` command produces its output at each interval.
 
+  采样间隔时间, 指定以秒（s）或毫秒（ms）为单位。 默认单位是毫秒, 必须是正整数。 如果指定该参数，则`jstat`命令以这个时间间隔输出新的内容。
+
 - count
 
   Number of samples to display. The default value is infinity which causes the `jstat` command to display statistics until the target JVM terminates or the `jstat` command is terminated. This value must be a positive integer.
 
+  要展示的样本总数。 默认值为无穷大(infinity)，也就是 `jstat` 命令一直显示统计信息，直到目标JVM关闭, 或者退出`jstat`命令。 这个值必须是正整数。
+
 ## Description
 
+## 说明
+
 The `jstat` command displays performance statistics for an instrumented Java HotSpot VM. The target JVM is identified by its virtual machine identifier, or `vmid` option.
+
+`jstat` 可以输出一个HotSpot虚拟机的性能统计信息。 目标JVM由其虚拟机标识符，或者`vmid`选项来标识。
 
 
 
 ## Virtual Machine Identifier
 
+## 虚拟机标识符
+
 The syntax of the `vmid` string corresponds to the syntax of a URI:
+
+`vmid`字符串的语法类似于URI:
 
 ```
 [protocol:][//]lvmid[@hostname[:port]/servername]
 ```
+其中,
 
 - protocol
 
   The communications protocol. If the *protocol* value is omitted and a host name is not specified, then the default protocol is a platform-specific optimized local protocol. If the *protocol* value is omitted and a host name is specified, then the default protocol is `rmi`.
 
+  通信协议。 如果省略这个值, 也不指定主机名（host name），则默认协议则是该平台的本地优化协议(optimized local protocol)。 如果省略 *protocol* 值但指定了主机名，则默认协议为 `rmi`。
+
 - lvmid
 
   The local virtual machine identifier for the target JVM. The `lvmid` is a platform-specific value that uniquely identifies a JVM on a system. The `lvmid` is the only required component of a virtual machine identifier. The `lvmid` is typically, but not necessarily, the operating system's process identifier for the target JVM process. You can use the `jps` command to determine the `lvmid`. Also, you can determine the `lvmid` on Solaris, Linux, and OS X platforms with the `ps` command, and on Windows with the Windows Task Manager.
+
+  目标JVM所在机器内部的本地虚拟机标识符（local virtual machine identifier）。 `lvmid` 唯一地标识了操作系统中的一个JVM，各格平台可能不一样。 `lvmid`是虚拟机标识符的唯一必需组件。 `lvmid`通常是目标JVM进程的进程号(但可能有例外)。 
+  
+  我们可以使用 `jps` 命令来确定 `lvmid`。 在Solaris，Linux和OS X平台上还可以使用 `ps` 命令来确定`lvmid`，在Windows上系统中可以使用任务管理器查看 `lvmid`。
 
 - hostname
 
   A hostname or IP address that indicates the target host. If the *hostname* value is omitted, then the target host is the local host.
 
+  主机名, 可以是目标主机的域名或IP地址。 如果省略 *hostname* 值，则目标主机就是本机。
+
 - port
 
   The default port for communicating with the remote server. If the *hostname* value is omitted or the *protocol* value specifies an optimized, local protocol, then the *port* value is ignored. Otherwise, treatment of the `port` parameter is implementation-specific. For the default `rmi`protocol, the port value indicates the port number for the rmiregistry on the remote host. If the *port* value is omitted and the *protocol* value indicates `rmi`, then the default rmiregistry port (1099) is used.
 
+  与远程服务器通信的默认端口。 
+  
+  如果省略*hostname*值, 或者指定 *protocol* 为本地优化协议，则会忽略 *port* 值。 
+  
+  否则，`port`参数的默认值由具体平台确定。 如果是默认的`rmi`协议，则表示远程主机上 rmiregistry（rmi注册服务）的端口号。 如果省略 *port* 并且协议为`rmi`，则使用rmiregistry的默认端口号（1099）。
+
 - servername
 
   The treatment of the `servername` parameter depends on implementation. For the optimized local protocol, this field is ignored. For the `rmi` protocol, it represents the name of the RMI remote object on the remote host.
+
+  `servername`参数的处理取决于实现。 本地优化协议会忽略此字段。 `rmi`协议下则表示远程主机上，RMI远程对象的名称。
 
 
 
