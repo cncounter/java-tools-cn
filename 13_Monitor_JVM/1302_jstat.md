@@ -47,7 +47,7 @@ jstat [ generalOption | outputOptions vmid [ interval[s|ms] [ count ] ]
 
   Number of samples to display. The default value is infinity which causes the `jstat` command to display statistics until the target JVM terminates or the `jstat` command is terminated. This value must be a positive integer.
 
-  要展示的样本总数。 默认值为无穷大(infinity)，也就是 `jstat` 命令一直显示统计信息，直到目标JVM关闭, 或者退出`jstat`命令。 这个值必须是正整数。
+  要输出的采样次数, 必须是正整数值。 默认值为无穷大(infinity)，也就是 `jstat` 命令会持续输出统计信息，直到目标JVM关闭, 或者`jstat`命令终止。 
 
 ## Description
 
@@ -114,26 +114,46 @@ The syntax of the `vmid` string corresponds to the syntax of a URI:
 
 ## Options
 
+## 命令选项
+
 The `jstat` command supports two types of options, general options and output options. General options cause the `jstat` command to display simple usage and version information. Output options determine the content and format of the statistical output.
+
+`jstat`命令支持两种类型的选项，通用选项和输出选项。 通用选项只用于显示简单的用法和版本信息。 输出选项则决定了统计信息的输出内容/格式。
 
 All options and their functionality are subject to change or removal in future releases.
 
-
+所有选项和功能，在新版本的JDK中，都有可能会发生更改/删除。
 
 
 
 ### General Options
 
+### 通用选项（General Options）
+
+
 If you specify one of the general options, then you cannot specify any other option or parameter.
+
+如果指定了一个通用选项，则不能再指定其他选项。
 
 - `-help`
 
   Displays a help message.
 
+  显示帮助消息。
+
 - `-options`
 
   Displays a list of static options. See Output Options.
 
+  输出支持的选项（options）。 详细信息请参考下文。
+
+使用示例:
+
+```
+jstat
+jstat -help
+jstat -options
+```
 
 
 ### Output Options
