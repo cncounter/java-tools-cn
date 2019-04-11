@@ -837,9 +837,12 @@ This section presents some examples of monitoring a local JVM with an *lvmid* of
 
 ### The gcutil Option
 
-This example attaches to lvmid 21891 and takes 7 samples at 250 millisecond intervals and displays the output as specified by the -`gcutil` option.
+### `gcutil` 选项示例
 
-The output of this example shows that a young generation collection occurred between the third and fourth sample. The collection took 0.078 seconds and promoted objects from the eden space (E) to the old space (O), resulting in an increase of old space utilization from 66.80% to 68.19%. Before the collection, the survivor space was 97.02% utilized, but after this collection it is 91.03% utilized.
+This example attaches to lvmid 21891 and takes 7 samples at 250 millisecond intervals and displays the output as specified by the `-gcutil` option.
+
+下面用 jstat 连到lvmid为 21891的JVM，以250毫秒的间隔进行7次采样，指定输出选项为 `-gcutil`。
+
 
 ```
 jstat -gcutil 21891 250 7
@@ -853,20 +856,25 @@ jstat -gcutil 21891 250 7
  91.03   0.00  17.80  68.19  95.89  91.24      8    0.378     0    0.000    0.378
 ```
 
+The output of this example shows that a young generation collection occurred between the third and fourth sample. The collection took 0.078 seconds and promoted objects from the eden space (E) to the old space (O), resulting in an increase of old space utilization from 66.80% to 68.19%. Before the collection, the survivor space was 97.02% utilized, but after this collection it is 91.03% utilized.
 
+从输出可以看出, 在第三个和第四个样本之间, 发生了一次年轻代GC。 这次GC耗时0.078秒，并将部分对象从年轻代提升到老年代， 导致老年代空间的使用率从66.80% 上升到 68.19%。 在GC之前, 存活区的使用率为 97.02%，但GC之后，存活区的使用率为 91.03%。
 
 
 
 ### Repeat the Column Header String
 
+### 每N行后输出一次标题行
+
 This example attaches to lvmid 21891 and takes samples at 250 millisecond intervals and displays the output as specified by `-gcnew` option. In addition, it uses the `-h3` option to output the column header after every 3 lines of data.
 
-In addition to showing the repeating header string, this example shows that between the second and third samples, a young GC occurred. Its duration was 0.001 seconds. The collection found enough active data that the survivor space 0 utilization (S0U) would have exceeded the desired survivor Size (DSS). As a result, objects were promoted to the old generation (not visible in this output), and the tenuring threshold (TT) was lowered from 31 to 2.
+下面用 jstat 连到lvmid为 21891的JVM，以250毫秒的间隔进行7次采样, 指定输出选项为 `-gcnew`。 此外，通过 `-h3` 选项指定每3行数据后输出一次标题行。
 
-Another collection occurs between the fifth and sixth samples. This collection found very few survivors and returned the tenuring threshold to 31.
+
 
 ```
 jstat -gcnew -h3 21891 250
+
  S0C    S1C    S0U    S1U   TT MTT  DSS      EC       EU     YGC     YGCT
   64.0   64.0    0.0   31.7 31  31   32.0    512.0    178.6    249    0.203
   64.0   64.0    0.0   31.7 31  31   32.0    512.0    355.5    249    0.203
@@ -879,17 +887,29 @@ jstat -gcnew -h3 21891 250
   64.0   64.0    0.0   19.0 31  31   32.0    512.0    306.7    251    0.204
 ```
 
+In addition to showing the repeating header string, this example shows that between the second and third samples, a young GC occurred. Its duration was 0.001 seconds. The collection found enough active data that the survivor space 0 utilization (S0U) would have exceeded the desired survivor Size (DSS). As a result, objects were promoted to the old generation (not visible in this output), and the tenuring threshold (TT) was lowered from 31 to 2.
 
+除了重复标题行增加可读性之外，此示例还表明，在第二个和第三个样本之间，发生了一个年轻代GC， 持续时间为0.001秒。 GC发现有了足够的活跃数据，存活区S0的使用量（S0U）超过了期望的存活区大小（DSS）。 结果是有一部分对象被提升到老年代（在此输出中看不到），并且晋升阈值（TT）从31降到2。
+
+Another collection occurs between the fifth and sixth samples. This collection found very few survivors and returned the tenuring threshold to 31.
+
+另一次GC发生在第五和第六次采样期间。 这次GC发现存活对象很少，将晋升阈值恢复到31。
 
 
 
 ### Include a Time Stamp for Each Sample
 
+### 在每个样本前面加上时间戳
+
 This example attaches to lvmid 21891 and takes 3 samples at 250 millisecond intervals. The `-t` option is used to generate a time stamp for each sample in the first column.
 
-The Timestamp column reports the elapsed time in seconds since the start of the target JVM. In addition, the `-gcoldcapacity` output shows the old generation capacity (OGC) and the old space capacity (OC) increasing as the heap expands to meet allocation or promotion demands. The old generation capacity (OGC) has grown from 11,696 kB to 13,820 kB after the eighty-first full garbage collection (FGC). The maximum capacity of the generation (and space) is 60,544 kB (OGCMX), so it still has room to expand.
+下面用 jstat 连到lvmid为 21891的JVM，以250毫秒的间隔进行3次采样, 指定输出选项为 `-gcnew`。   `-t`选项用于为第一列中的每个样本生成时间戳。
+
 
 ```
+jstat -gcoldcapacity -t 21891 250
+
+
 Timestamp      OGCMN    OGCMX     OGC       OC       YGC   FGC    FGCT    GCT
           150.1   1408.0  60544.0  11696.0  11696.0   194    80    2.874   3.799
           150.4   1408.0  60544.0  13820.0  13820.0   194    81    2.938   3.863
@@ -897,20 +917,30 @@ Timestamp      OGCMN    OGCMX     OGC       OC       YGC   FGC    FGCT    GCT
 ```
 
 
+The Timestamp column reports the elapsed time in seconds since the start of the target JVM. In addition, the `-gcoldcapacity` output shows the old generation capacity (OGC) and the old space capacity (OC) increasing as the heap expands to meet allocation or promotion demands. The old generation capacity (OGC) has grown from 11,696 kB to 13,820 kB after the eighty-first full garbage collection (FGC). The maximum capacity of the generation (and space) is 60,544 kB (OGCMX), so it still has room to expand.
+
+Timestamp列显示了自目标JVM启动以来经过的时间（以秒为单位）。 此外，指定输出选项为 `-gcoldcapacity`， 用于显示老年代的容量（OGC）, 以及老年空间的容量（OC）, 都随着堆内存的扩展而变大。 在第81次 FGC 后，老年代的容量（OGC）从 11,696 kB 增长到了 13,820 kB。 老年代空间允许的最大值为 60,544 kB（OGCMX），因此还有扩展空间。
 
 
 
 ### Monitor Instrumentation for a Remote JVM
 
+### 监视远程JVM
+
 This example attaches to lvmid 40496 on the system named remote.domain using the `-gcutil` option, with samples taken every second indefinitely.
 
-The lvmid is combined with the name of the remote host to construct a *vmid* of `40496@remote.domain`. This vmid results in the use of the `rmi` protocol to communicate to the default `jstatd` server on the remote host. The `jstatd` server is located using the `rmiregistry`command on `remote.domain` that is bound to the default port of the `rmiregistry` command (port 1099).
+下面用 jstat 连到remote.domain机器上，lvmid为 40496 的JVM， 指定输出选项为 `-gcutil` 。每秒钟生成一次样本， 持续时间不限制。
+
+
 
 ```
 jstat -gcutil 40496@remote.domain 1000
 ... output omitted
 ```
 
+The lvmid is combined with the name of the remote host to construct a *vmid* of `40496@remote.domain`. This vmid results in the use of the `rmi` protocol to communicate to the default `jstatd` server on the remote host. The `jstatd` server is located using the `rmiregistry`command on `remote.domain` that is bound to the default port of the `rmiregistry` command (port 1099).
+
+`40496@remote.domain` 表示在这台机器上, lvmid为 40496，这个vmid串使用默认的 `rmi` 协议， 连接到远程主机上 `jstatd`服务器的默认端口。 `jstatd` 通过 `rmiregistry` 命令监听 `remote.domain`，默认端口是（1099）。
 
 
 
@@ -919,14 +949,16 @@ jstat -gcutil 40496@remote.domain 1000
 
 See Also
 
+另请参阅
 
-- [`java`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html#CBBFHAJA)
 
-- [`jps`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html#CHDGHCGB)
+- [`java`](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html#CBBFHAJA)
 
-- [`jstatd`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstatd.html#BABHHDIB)
+- [`jps`](./1301_jps.md)
 
-- [`rmiregistry`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/rmiregistry.html#CHDEDDIE)
+- [`jstatd`](./1303_jstatd.md)
 
-<https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstat.html>
+- [`rmiregistry`](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/rmiregistry.html#CHDEDDIE)
+
+原文链接: <https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstat.html>
 
