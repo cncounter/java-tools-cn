@@ -192,11 +192,11 @@ interval 参数决定了 `jstat` 命令输出的频率，  count 参数决定了
 
   Determines the statistics information the jstat command displays. The following lists the available options. Use the -options general option to display the list of options for a particular platform installation. See Stat Options and Output.
 
-  状态选项决定了 jstat 命令输出哪些统计信息。可以使用常规选项 `-options` 查看支持的选项。 详细信息请参考下文。下面是可用的状态选项列表。 
+  统计选项决定了 jstat 命令输出哪些统计信息。可以使用常规选项 `-options` 查看支持的选项。 详细信息请参考下文。下面是可用的统计选项列表。 
 
   `class`: Displays statistics about the behavior of the class loader.
 
-  `class`: 显示 class loader 相关的统计信息。 示例: `jstat -class 8640`
+  `class`: 显示 class loader 相关的统计信息。 示例: `jstat -class 21891`
 
   `compiler`: Displays statistics about the behavior of the Java HotSpot VM Just-in-Time compiler.
 
@@ -212,7 +212,7 @@ interval 参数决定了 `jstat` 命令输出的频率，  count 参数决定了
 
   `gccause`: Displays a summary about garbage collection statistics (same as -gcutil), with the cause of the last and current (when applicable) garbage collection events.
 
-  `gccause`: 显示垃圾收集相关的汇总统计信息（与 `-gcutil` 类似），但在最后面加上，上次GC的原因（LGCC）, 和当前GC的原因（GCC, 如果处于GC过程中的话）。 示例: `jstat -gccause -h 5 19629 5s`
+  `gccause`: 显示垃圾收集相关的汇总统计信息（与 `-gcutil` 类似），但在最后面加上，上次GC的原因（LGCC）, 和当前GC的原因（GCC, 如果处于GC过程中的话）。 示例: `jstat -gccause -h 5 21891 5s`
 
   `gcnew`: Displays statistics of the behavior of the new generation.
 
@@ -265,277 +265,560 @@ interval 参数决定了 `jstat` 命令输出的频率，  count 参数决定了
 
 ### Stat Options and Output
 
+### 统计选项和输出内容
+
+
 The following information summarizes the columns that the `jstat` command outputs for each *statOption*.
+
+下面汇总了每个统计选项(statOption)的输出列。
 
 - `-class` *option*
 
+- `-class`选项
+
   Class loader statistics.
+
+  类加载(Class loader)信息统计.
   
   `Loaded`: Number of classes loaded.
 
+  `Loaded`: 已加载的 class 数量.
+
   `Bytes`: Number of kBs loaded.
+
+  `Bytes`: 已加载的字节数.
 
   `Unloaded`: Number of classes unloaded.
 
+  `Unloaded`: 已卸载(unloaded)的 class 数量.
+
   `Bytes`: Number of Kbytes unloaded.
+
+  `Bytes`: 已卸载的字节数.
 
   `Time`: Time spent performing class loading and unloading operations.
 
+  `Time`: 执行类加载与类卸载所消耗的时间.
+
 - `-compiler` *option*
 
+- `-compiler`选项
+
   Java HotSpot VM Just-in-Time compiler statistics.
+
+  Java HotSpot VM 即时编译器(Just-in-Time)相关的统计信息。
   
   `Compiled`: Number of compilation tasks performed.
+
+  `Compiled`: 已执行的编译任务数。
   
   `Failed`: Number of compilations tasks failed.
+
+  `Failed`: 编译任务失败数量.
   
   `Invalid`: Number of compilation tasks that were invalidated.
+
+  `Invalid`: 无效的编译任务数量.
   
   `Time`: Time spent performing compilation tasks.
+
+  `Time`: 执行编译任务花费的总时间.
   
   `FailedType`: Compile type of the last failed compilation.
+
+  `FailedType`: 最后一次编译失败的编译类型.
   
-  `FailedMethod`: Class name and method of the last failed compilation.
+  `FailedMethod`: 最后一次编译失败的Class名称与方法
 
 - `-gc` *option*
 
+- `-gc`选项
+
   Garbage-collected heap statistics.
+
+  垃圾收集相关的堆内存信息. 示例用法: `jstat -gc -h 10 -t 21891 1s`
 
   `S0C`: Current survivor space 0 capacity (kB).
 
+  `S0C`: 存活区S0的当前容量(capacity), 单位 kB.
+
   `S1C`: Current survivor space 1 capacity (kB).
+
+  `S1C`: 存活区S1的当前容量(capacity), 单位 kB.
 
   `S0U`: Survivor space 0 utilization (kB).
 
+  `S0U`: 存活区S0的使用量(utilization), 单位 kB.
+
   `S1U`: Survivor space 1 utilization (kB).
+
+  `S1U`: 存活区S1的使用量(utilization), 单位 kB.
 
   `EC`: Current eden space capacity (kB).
 
+  `EC`: 新生代(Eden区)的当前容量(capacity), 单位 kB.
+
   `EU`: Eden space utilization (kB).
+
+  `EU`: 新生代(Eden区)的使用量(utilization), 单位 kB.
 
   `OC`: Current old space capacity (kB).
 
+  `OC`: 老年代(old space)的当前容量(capacity), 单位 kB.
+
   `OU`: Old space utilization (kB).
 
+  `OU`: 老年代(old space)的使用量(utilization), 单位 kB.
+
   `MC`: Metaspace capacity (kB).
+
+  `MC`: 元数据区(Metaspace)的容量(capacity), 单位 kB.
 
   `MU`: Metacspace utilization (kB).
 
+  `MU`: 元数据区(Metaspace)的使用量(utilization), 单位 kB.
+
   `CCSC`: Compressed class space capacity (kB).
 
+  `CCSC`: 压缩的class空间(Compressed class space)容量, 单位 kB.
+
   `CCSU`: Compressed class space used (kB).
+
+  `CCSU`: 压缩的class空间(Compressed class space)使用量, 单位 kB.
 
   `YGC`: Number of young generation garbage collection events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `YGCT`: Young generation garbage collection time.
+
+  `YGCT`: 年轻代GC消耗的总时间。
 
   `FGC`: Number of full GC events.
 
+  `FGC`: Full GC 的次数
+
   `FGCT`: Full garbage collection time.
 
+  `FGCT`: Full GC 消耗的时间.
+
   `GCT`: Total garbage collection time.
+
+  `GCT`: 垃圾收集消耗的总时间。
 
 - `-gccapacity` *option*
 
+- `-gccapacity`选项
+
   Memory pool generation and space capacities.
+
+  内存池分代与各个空间的容量。示例用法: `jstat -gccapacity -h 10 -t 21891 1s`
 
   `NGCMN`: Minimum new generation capacity (kB).
 
+  `NGCMN`: 年轻代的最小容量, 单位 kB.
+
   `NGCMX`: Maximum new generation capacity (kB).
+
+  `NGCMX`: 年轻代的最大容量, 单位 kB.
 
   `NGC`: Current new generation capacity (kB).
 
+  `NGC`: 年轻代的当前容量, 单位 kB.
+
   `S0C`: Current survivor space 0 capacity (kB).
+
+  `S0C`: 存活区S0的当前容量(capacity), 单位 kB.
 
   `S1C`: Current survivor space 1 capacity (kB).
 
+  `S1C`: 存活区S1的当前容量(capacity), 单位 kB.
+
   `EC`: Current eden space capacity (kB).
+
+  `EC`: 新生代(Eden区)的当前容量(capacity), 单位 kB.
 
   `OGCMN`: Minimum old generation capacity (kB).
 
+  `OGCMN`: 老年代允许的最小容量, 单位 kB.
+
   `OGCMX`: Maximum old generation capacity (kB).
+
+  `OGCMX`: 老年代的最大容量, 单位 kB.
 
   `OGC`: Current old generation capacity (kB).
 
+  `OGC`: 此刻老年代空间的大小, 单位 kB.
+
   `OC`: Current old space capacity (kB).
+
+  `OC`: 老年代(old space)的当前容量(capacity), 单位 kB.
 
   `MCMN`: Minimum metaspace capacity (kB).
 
+  `MCMN`: 元数据区(Metaspace)的最小容量, 单位 kB.
+
   `MCMX`: Maximum metaspace capacity (kB).
+
+  `MCMX`: 元数据区(Metaspace)的最大容量, 单位 kB.
 
   `MC`: Metaspace capacity (kB).
 
+  `MC`: 元数据区(Metaspace)的容量(capacity), 单位 kB.
+
   `CCSMN`: Compressed class space minimum capacity (kB).
+
+  `CCSMN`: 压缩的class空间(Compressed class space)的最小容量, 单位 kB.
 
   `CCSMX`: Compressed class space maximum capacity (kB).
 
+  `CCSMX`: 压缩的class空间(Compressed class space)的最大容量, 单位 kB.
+
   `CCSC`: Compressed class space capacity (kB).
+
+  `CCSC`: 压缩的class空间(Compressed class space)容量, 单位 kB.
 
   `YGC`: Number of young generation GC events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `FGC`: Number of full GC events.
+
+  `FGC`: Full GC 的次数
 
 - `-gccause` *option*
 
+- `-gccause`选项
+
   This option displays the same summary of garbage collection statistics as the `-gcutil` option, but includes the causes of the last garbage collection event and (when applicable) the current garbage collection event. In addition to the columns listed for `-gcutil`, this option adds the following columns.
 
-  `LGCC`: Cause of last garbage collection`GCC`: Cause of current garbage collection
+  此选项展示垃圾收集相关区域的统计信息， 和 `-gcutil` 选项（gc相关使用率）的输出基本一致，但多了上次GC事件的原因(`LGCC`), 以及本次GC（如果正在GC中）的原因。 本选项比`-gcutil`选项多出的列：
+
+  `LGCC`: Cause of last garbage collection
+
+  `LGCC`: 上次GC事件的原因
+  
+  `GCC`: Cause of current garbage collection
+
+  `GCC`: 本次GC的原因
 
 - `-gcnew` *option*
 
+- `-gcnew`选项
+
   New generation statistics.
+
+  年轻代的统计信息. （New = Eden + S0 + S1）
 
   `S0C`: Current survivor space 0 capacity (kB).
 
+  `S0C`: 存活区S0的当前容量(capacity), 单位 kB.
+
   `S1C`: Current survivor space 1 capacity (kB).
+
+  `S1C`: 存活区S1的当前容量(capacity), 单位 kB.
 
   `S0U`: Survivor space 0 utilization (kB).
 
+  `S0U`: 存活区S0的使用量(utilization), 单位 kB.
+
   `S1U`: Survivor space 1 utilization (kB).
+
+  `S1U`: 存活区S1的使用量(utilization), 单位 kB.
 
   `TT`: Tenuring threshold.
 
+  `TT`: 晋升阈值(Tenuring threshold).
+
   `MTT`: Maximum tenuring threshold.
+
+  `MTT`: 最大晋升阈值.
 
   `DSS`: Desired survivor size (kB).
 
+  `DSS`: 期望的存活区大小, 单位 kB.
+
   `EC`: Current eden space capacity (kB).
+
+  `EC`: 新生代(Eden区)的当前容量(capacity), 单位 kB.
 
   `EU`: Eden space utilization (kB).
 
+  `EU`: 新生代(Eden区)的使用量(utilization), 单位 kB.
+
   `YGC`: Number of young generation GC events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `YGCT`: Young generation garbage collection time.
+
+  `YGCT`: 年轻代GC消耗的总时间。
+
 
 - `-gcnewcapacity` *option*
 
+- `-gcnewcapacity`选项
+
   New generation space size statistics.
+
+  年轻代空间大小统计.
 
   `NGCMN`: Minimum new generation capacity (kB).
 
+  `NGCMN`: 年轻代的最小容量, 单位 kB.
+
   `NGCMX`: Maximum new generation capacity (kB).
+
+  `NGCMX`: 年轻代的最大容量, 单位 kB.
 
   `NGC`: Current new generation capacity (kB).
 
+  `NGC`: 年轻代的当前容量, 单位 kB.
+
   `S0CMX`: Maximum survivor space 0 capacity (kB).
+
+  `S0CMX`: 存活区S0的最大容量, 单位 kB.
 
   `S0C`: Current survivor space 0 capacity (kB).
 
+  `S0C`: 存活区S0的当前容量(capacity), 单位 kB.
+
   `S1CMX`: Maximum survivor space 1 capacity (kB).
+
+  `S1CMX`: 存活区S1的最大容量, 单位 kB.
 
   `S1C`: Current survivor space 1 capacity (kB).
 
+  `S1C`: 存活区S1的当前容量(capacity), 单位 kB.
+
   `ECMX`: Maximum eden space capacity (kB).
+
+  `ECMX`: 新生代(eden区)的最大容量, 单位 kB.
 
   `EC`: Current eden space capacity (kB).
 
+  `EC`: 新生代(Eden区)的当前容量(capacity), 单位 kB.
+
   `YGC`: Number of young generation GC events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `FGC`: Number of full GC events.
+
+  `FGC`: Full GC 的次数
+
 
 - `-gcold` *option*
 
+- `-gcold`选项
+
   Old generation and metaspace behavior statistics.
 
+  老年代和元数据区的行为统计。
+
   `MC`: Metaspace capacity (kB).
+
+  `MC`: 元数据区(Metaspace)的容量(capacity), 单位 kB.
 
   `MU`: Metaspace utilization (kB).
 
+  `MU`: 元数据区(Metaspace)的使用量(utilization), 单位 kB.
+
   `CCSC`: Compressed class space capacity (kB).
+
+  `CCSC`: 压缩的class空间(Compressed class space)容量, 单位 kB.
 
   `CCSU`: Compressed class space used (kB).
 
+  `CCSU`: 压缩的class空间(Compressed class space)使用量, 单位 kB.
+
   `OC`: Current old space capacity (kB).
+
+  `OC`: 老年代(old space)的当前容量(capacity), 单位 kB.
 
   `OU`: Old space utilization (kB).
 
+  `OU`: 老年代(old space)的使用量(utilization), 单位 kB.
+
   `YGC`: Number of young generation GC events.
+
+  `YGC`: 年轻代GC(young generation)的次数。
 
   `FGC`: Number of full GC events.
 
+  `FGC`: Full GC 的次数
+
   `FGCT`: Full garbage collection time.
 
+  `FGCT`: Full GC 消耗的时间.
+
   `GCT`: Total garbage collection time.
+
+  `GCT`: 垃圾收集消耗的总时间。
+
 
 - `-gcoldcapacity` *option*
 
+- `-gcoldcapacity`选项
+
   Old generation size statistics.
+
+  老年代空间大小统计.
 
   `OGCMN`: Minimum old generation capacity (kB).
 
+  `OGCMN`: 老年代允许的最小容量, 单位 kB.
+
   `OGCMX`: Maximum old generation capacity (kB).
+
+  `OGCMX`: 老年代的最大容量, 单位 kB.
 
   `OGC`: Current old generation capacity (kB).
 
+  `OGC`: 此刻老年代空间的大小, 单位 kB.
+
   `OC`: Current old space capacity (kB).
+
+  `OC`: 老年代(old space)的当前容量(capacity), 单位 kB.
 
   `YGC`: Number of young generation GC events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `FGC`: Number of full GC events.
+
+  `FGC`: Full GC 的次数
 
   `FGCT`: Full garbage collection time.
 
+  `FGCT`: Full GC 消耗的时间.
+
   `GCT`: Total garbage collection time.
+
+  `GCT`: 垃圾收集消耗的总时间。
+
 
 - `-gcmetacapacity` *option*
 
+- `-gcmetacapacity`选项
+
   Metaspace size statistics.
+
+  元数据区大小统计.
 
   `MCMN`: Minimum metaspace capacity (kB).
 
+  `MCMN`: 元数据区(Metaspace)的最小容量, 单位 kB.
+
   `MCMX`: Maximum metaspace capacity (kB).
+
+  `MCMX`: 元数据区(Metaspace)的最大容量, 单位 kB.
 
   `MC`: Metaspace capacity (kB).
 
+  `MC`: 元数据区(Metaspace)的容量(capacity), 单位 kB.
+
   `CCSMN`: Compressed class space minimum capacity (kB).
+
+  `CCSMN`: 压缩的class空间(Compressed class space)的最小容量, 单位 kB.
 
   `CCSMX`: Compressed class space maximum capacity (kB).
 
+  `CCSMX`: 压缩的class空间(Compressed class space)的最大容量, 单位 kB.
+
   `YGC`: Number of young generation GC events.
+
+  `YGC`: 年轻代GC(young generation)的次数。
 
   `FGC`: Number of full GC events.
 
+  `FGC`: Full GC 的次数
+
   `FGCT`: Full garbage collection time.
 
+  `FGCT`: Full GC 消耗的时间.
+
   `GCT`: Total garbage collection time.
+
+  `GCT`: 垃圾收集消耗的总时间。
+
 
 - `-gcutil` *option*
 
+- `-gcutil`选项
+
   Summary of garbage collection statistics.
+
+  垃圾收集相关区域的使用率(utilization)统计。
 
   `S0`: Survivor space 0 utilization as a percentage of the space's current capacity.
 
+  `S0`: 存活区S0, 当前使用量/当前容量, 单位是百分比（%）.
+
   `S1`: Survivor space 1 utilization as a percentage of the space's current capacity.
+
+  `S1`: 存活区S1, 当前使用量/当前容量, 单位是百分比（%）.
 
   `E`: Eden space utilization as a percentage of the space's current capacity.
 
+  `E`: Eden区（新生代）, 当前使用量/当前容量, 单位是百分比（%）.
+
   `O`: Old space utilization as a percentage of the space's current capacity.
+
+  `O`: 老年代, 当前使用量/当前容量, 单位是百分比（%）.
 
   `M`: Metaspace utilization as a percentage of the space's current capacity.
 
+  `M`: Meta区, 当前使用量/当前容量, 单位是百分比（%）.
+
   `CCS`: Compressed class space utilization as a percentage.
+
+  `CCS`: 压缩的class空间(Compressed class space)的使用率, 百分比.
 
   `YGC`: Number of young generation GC events.
 
+  `YGC`: 年轻代GC(young generation)的次数。
+
   `YGCT`: Young generation garbage collection time.
+
+  `YGCT`: 年轻代GC消耗的总时间。
 
   `FGC`: Number of full GC events.
 
+  `FGC`: Full GC 的次数
+
   `FGCT`: Full garbage collection time.
+
+  `FGCT`: Full GC 消耗的时间.
 
   `GCT`: Total garbage collection time.
 
+  `GCT`: 垃圾收集消耗的总时间。
+
+
 - `-printcompilation` *option*
+
+- `-printcompilation`选项
 
   Java HotSpot VM compiler method statistics.
 
+  JVM（HotSpot）编译方法统计。
+
   `Compiled`: Number of compilation tasks performed by the most recently compiled method.
+
+  `Compiled`: 最近使用的编译方法，已执行的编译任务数。
 
   `Size`: Number of bytes of byte code of the most recently compiled method.
 
+  `Size`: 最近使用的编译方法，编译的字节码数量(字节数).
+
   `Type`: Compilation type of the most recently compiled method.
 
+  `Type`: 最近使用的编译方法，执行的编译类型
+
   `Method`: Class name and method name identifying the most recently compiled method. Class name uses slash (/) instead of dot (.) as a name space separator. Method name is the method within the specified class. The format for these two fields is consistent with the HotSpot `-XX:+PrintCompilation` option.
+
+  `Method`: 标识最近编译方法的类名(Class name)和方法名(method name)。 类名的分隔符使用左斜杠（/）代替点号（.）。 方法名就是指定类中的方法。 这两个字段的格式与JVM启动参数 `-XX:+PrintCompilation` 的格式一致。
 
 
 
@@ -545,8 +828,11 @@ The following information summarizes the columns that the `jstat` command output
 
 ## Examples
 
+## jstat使用示例
+
 This section presents some examples of monitoring a local JVM with an *lvmid* of 21891.
 
+下面的示例，假设监控的是本地的JVM， `lvmid`(进程号) 为 `21891`。
 
 
 ### The gcutil Option
