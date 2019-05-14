@@ -2,19 +2,19 @@
 
 Java Platform, Standard Edition Tools Reference
 
-英文版地址: [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/index.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/index.html)
+英文版地址: <http://docs.oracle.com/javase/8/docs/technotes/tools/windows/index.html>
 
-Unix英文版: [http://docs.oracle.com/javase/8/docs/technotes/tools/unix/index.html](http://docs.oracle.com/javase/8/docs/technotes/tools/unix/index.html)
+Unix英文版: <http://docs.oracle.com/javase/8/docs/technotes/tools/unix/index.html>
 
-Java8的手册目录: [http://docs.oracle.com/javase/8/](http://docs.oracle.com/javase/8/)
+Java8的手册目录: <http://docs.oracle.com/javase/8/>
 
-站点地址: [http://blog.cncounter.com/java-tools-cn/](http://blog.cncounter.com/java-tools-cn/)
+站点地址: <https://github.com/cncounter/java-tools-cn>
 
 
 原作者：
 
 
-本翻译文档由CNCounter中文翻译组于2015年12月21日开始翻译，版权由原文版权所有者和翻译组共同所有。参与翻译请在wiki留言: [https://github.com/cncounter/java-tools-cn/wiki](https://github.com/cncounter/java-tools-cn/wiki)。
+本翻译文档由CNCounter中文翻译组于2015年12月21日开始翻译，版权由原文版权所有者和翻译组共同所有。参与翻译请在wiki留言: <https://github.com/cncounter/java-tools-cn/wiki>。
 
 翻译组成员列表如下(排名不分先后)：
 
