@@ -19,7 +19,7 @@ jinfo [option] [servier-id] <remote-hostname-or-IP>
 
 - `pid`
 
-  The process ID for which the configuration information is to be printed. The process must be a Java process. To get a list of Java processes running on a machine, use the [`jps`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html#CHDGHCGB) command.
+  The process ID for which the configuration information is to be printed. The process must be a Java process. To get a list of Java processes running on a machine, use the [`jps`](../13_Monitor_JVM/1301_jps.md) command.
 
 - `executable`
 
@@ -84,5 +84,6 @@ This utility is unsupported and might not be available in future releases of the
 ### See Also
 
 
-- [`jps`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html)
-- [`jsadebugd`(1)](./jsadebugd.md)
+- [jps](../13_Monitor_JVM/1301_jps.md)
+- [jsadebugd](./jsadebugd.md)
+

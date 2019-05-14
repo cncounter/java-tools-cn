@@ -161,7 +161,7 @@ There are several ways to generate a Java heap dump:
 
 ### 另请参阅:
 
-- [`jmap`(1)](./jmap.md)
+- [`jmap`](./jmap.md)
 - [`jconsole`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jconsole.html#CACDDJCH)
 - 性能分析工具-HPROF简介, <https://github.com/cncounter/translation/blob/master/tiemao_2017/20_hprof/20_hprof.md>
 

@@ -135,9 +135,9 @@ In mixed mode stack trace, the -m option does not work with the remote debug ser
 ### 另请参阅
 
 
-- jps(1)
+- [jps](../13_Monitor_JVM/1301_jps.md)
 
-- jsadebugd(1)
+- [jsadebugd](./jsadebugd.md)
 
-原文链接: [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstack.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstack.html)
+原文链接: <http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jstack.html>
 

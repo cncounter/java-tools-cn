@@ -202,5 +202,5 @@ sudo jcmd -l
 
 ### 另请参见
 
-- [`jps`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html)
+- [jps](../13_Monitor_JVM/1301_jps.md)
 

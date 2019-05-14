@@ -46,9 +46,9 @@ If the RMI registry was not started, then the `jsadebugd` command starts an RMI 
 ### See Also
 
 
-- [`jinfo`(1)](./jinfo.md)
-- [`jmap`(1)](./jmap.md)
-- [`jps`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html)
-- [`jstack`(1)](./jstack.html)
-- [`rmiregistry`(1)](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/rmiregistry.html)
+- [`jinfo`](./jinfo.md)
+- [`jmap`](./jmap.md)
+- [jps](../13_Monitor_JVM/1301_jps.md)
+- [`jstack`](./jstack.md)
+- [`rmiregistry`](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/rmiregistry.html)
 

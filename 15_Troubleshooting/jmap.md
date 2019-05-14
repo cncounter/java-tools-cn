@@ -121,11 +121,11 @@ Force. Use this option with the jmap -dump or jmap -histo option when the pid do
 
 ### 另请参见
 
-- jhat(1)
+- [jhat](./jhat.md)
 
-- jps(1)
+- [jps](../13_Monitor_JVM/1301_jps.md)
 
-- jsadebugd(1)
+- [jsadebugd](./jsadebugd.md)
 
 原文链接:  [http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jmap.html](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jmap.html)
 
